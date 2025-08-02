@@ -1,4 +1,5 @@
 import { CyberSearchInterface } from "@/components/cyber-search-interface"
+import { IPReputationLookup } from "@/components/ip-reputation-lookup"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function CyberSearchPage() {
@@ -8,7 +9,10 @@ export default function CyberSearchPage() {
         <h1 className="text-3xl font-bold tracking-tight">🔍 Cyber Search</h1>
       </div>
 
-      <CyberSearchInterface />
+      <div className="grid gap-6 lg:grid-cols-2">
+        <CyberSearchInterface />
+        <IPReputationLookup />
+      </div>
 
       <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
         <CardHeader>
