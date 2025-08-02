@@ -152,9 +152,22 @@ export function CyberSearchInterface() {
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [activeTab, setActiveTab] = useState("search")
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) return
+    
     console.log("Searching for:", searchQuery)
-    // In a real app, this would trigger an API call
+    
+    // In a real implementation, you would call the SearchAPI
+    try {
+      const { SearchAPI } = await import('@/lib/api')
+      const results = await SearchAPI.performMultiSearch(searchQuery)
+      console.log("Search results:", results)
+      
+      // You could store results in local state or navigate to results page
+      // For now, just log the results
+    } catch (error) {
+      console.error("Search failed:", error)
+    }
   }
 
   const handleSuggestionClick = (query: string, externalLink?: string) => {
