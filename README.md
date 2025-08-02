@@ -12,6 +12,7 @@ A Halloween-themed cybersecurity monitoring dashboard built with Next.js, React,
 - 🔍 **Vulnerability Analysis** - Latest security vulnerabilities and assessments
 - 📚 **Learn Mode** - Educational content explaining cybersecurity concepts
 - 🔮 **Spooky Scan** - Halloween-themed security scanner
+- ⚡ **Google Custom Search** - Integrated web search with cybersecurity focus
 
 ## Deployment
 
@@ -34,6 +35,10 @@ This application is configured for deployment on Vercel.
 # Install dependencies
 npm install
 
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your Google Custom Search API credentials
+
 # Run development server
 npm run dev
 
@@ -43,6 +48,17 @@ npm run build
 # Start production server
 npm start
 ```
+
+### Google Custom Search Setup
+
+To enable the Google Custom Search functionality:
+
+1. Follow the detailed setup guide in [`docs/GOOGLE_SEARCH_SETUP.md`](./docs/GOOGLE_SEARCH_SETUP.md)
+2. Set up your Google Cloud Console project and enable the Custom Search API
+3. Create a Custom Search Engine
+4. Add your API credentials to `.env.local`
+
+The integration provides secure, server-side Google search capabilities with a cybersecurity focus.
 
 ## Tech Stack
 
