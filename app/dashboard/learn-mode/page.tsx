@@ -1,0 +1,32 @@
+import { EverydayExplanations } from "@/components/everyday-explanations"
+import { ReconnaissanceExplained } from "@/components/reconnaissance-explained"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+
+export default function LearnModePage() {
+  return (
+    <div className="flex-1 space-y-6 p-8">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold tracking-tight">📚 Learn Mode</h1>
+      </div>
+
+      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+        <CardHeader>
+          <CardTitle className="text-orange-400">🧙‍♀️ Salem's Security Wisdom</CardTitle>
+          <CardDescription className="text-orange-300/70">
+            Ancient wisdom for modern digital protection
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="text-white/70">
+            Just as the wise women of Salem once knew which herbs provided protection, today's security experts
+            understand that knowledge is your strongest shield against digital threats. Explore our Learn Mode
+            to arm yourself with the wisdom needed to ward off cyber attacks.
+          </p>
+        </CardContent>
+      </Card>
+
+      <EverydayExplanations />
+      <ReconnaissanceExplained />
+    </div>
+  )
+}
