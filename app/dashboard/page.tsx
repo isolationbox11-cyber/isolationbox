@@ -6,6 +6,7 @@ import { RecentEvents } from "@/components/recent-events"
 import { AlertsOverview } from "@/components/alerts-overview"
 import { SystemStatus } from "@/components/system-status"
 import { IoTScanner } from "@/components/iot-scanner"
+import { IOCMonitoring } from "@/components/ioc-monitoring"
 
 export default function DashboardPage() {
   return (
@@ -44,17 +45,20 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      {/* Middle row - Recent Events and Alerts */}
+      {/* Middle row - Recent Events and IOC Monitoring */}
       <div className="grid gap-6 md:grid-cols-2">
         <RecentEvents />
-        <AlertsOverview />
+        <IOCMonitoring />
       </div>
 
-      {/* Bottom row - System Status and IoT Scanner */}
+      {/* Bottom row - Alerts and System Status */}
       <div className="grid gap-6 md:grid-cols-2">
+        <AlertsOverview />
         <SystemStatus />
-        <IoTScanner />
       </div>
+      
+      {/* Full width - IoT Scanner */}
+      <IoTScanner />
     </div>
   )
 }
