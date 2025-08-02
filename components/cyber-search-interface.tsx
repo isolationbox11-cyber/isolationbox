@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Filter, Globe, Database, Server, Monitor, ExternalLink, Lightbulb, Skull, Ghost } from "lucide-react"
+import { Search, Filter, Globe, Database, Server, Monitor, ExternalLink, Lightbulb, Skull, Ghost, RefreshCw, AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -10,6 +10,29 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
+interface SearchResult {
+  ip: string
+  port: number
+  org: string
+  hostnames: string[]
+  location: {
+    country_name: string
+    city: string
+  }
+  data: string
+  product: string
+  version: string
+  timestamp: string
+  transport: string
+}
+
+interface SearchResponse {
+  total: number
+  matches: SearchResult[]
+  facets: any
+  error?: string
+}
 
 const hauntedSearchSuggestions = [
   {
@@ -151,10 +174,59 @@ export function CyberSearchInterface() {
   const [selectedDeviceType, setSelectedDeviceType] = useState("")
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [activeTab, setActiveTab] = useState("search")
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+  const [isSearching, setIsSearching] = useState(false)
+  const [searchError, setSearchError] = useState<string>("")
+  const [totalResults, setTotalResults] = useState(0)
+  const [hasSearched, setHasSearched] = useState(false)
 
-  const handleSearch = () => {
-    console.log("Searching for:", searchQuery)
-    // In a real app, this would trigger an API call
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) return
+    
+    setIsSearching(true)
+    setSearchError("")
+    setHasSearched(true)
+    
+    try {
+      let finalQuery = searchQuery.trim()
+      
+      // Add filters to query if selected
+      if (selectedCountry) {
+        finalQuery += ` country:"${selectedCountry}"`
+      }
+      
+      const params = new URLSearchParams({
+        q: finalQuery,
+        page: '1'
+      })
+      
+      const response = await fetch(`/api/shodan/search?${params}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      
+      if (!response.ok) {
+        throw new Error(`Search failed: ${response.statusText}`)
+      }
+      
+      const data: SearchResponse = await response.json()
+      
+      if (data.error) {
+        throw new Error(data.error)
+      }
+      
+      setSearchResults(data.matches || [])
+      setTotalResults(data.total || 0)
+    } catch (error) {
+      console.error("Search error:", error)
+      setSearchError(error instanceof Error ? error.message : "Search failed")
+      setSearchResults([])
+      setTotalResults(0)
+    }
+    
+    setIsSearching(false)
   }
 
   const handleSuggestionClick = (query: string, externalLink?: string) => {
@@ -215,9 +287,20 @@ export function CyberSearchInterface() {
                 </div>
                 <Button 
                   onClick={handleSearch} 
+                  disabled={isSearching || !searchQuery.trim()}
                   className="bg-orange-600 hover:bg-orange-700 animate-pulse shadow-[0_0_10px_rgba(255,102,0,0.5)]"
                 >
-                  <Search className="h-4 w-4 mr-2" />Conjure
+                  {isSearching ? (
+                    <>
+                      <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                      Searching...
+                    </>
+                  ) : (
+                    <>
+                      <Search className="h-4 w-4 mr-2" />
+                      Conjure
+                    </>
+                  )}
                 </Button>
                 <Button 
                   variant="outline" 
@@ -274,7 +357,128 @@ export function CyberSearchInterface() {
             </CardContent>
           </Card>
 
-          {/* Common Searches */}
+          {/* Search Results */}
+          {(hasSearched || searchError) && (
+            <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-orange-400">
+                  <Globe className="h-5 w-5" />
+                  Search Results
+                  {totalResults > 0 && (
+                    <Badge variant="outline" className="border-green-500/50 text-green-400">
+                      {totalResults.toLocaleString()} found
+                    </Badge>
+                  )}
+                </CardTitle>
+                <CardDescription className="text-orange-300/70">
+                  {totalResults > 0 
+                    ? `Found ${totalResults.toLocaleString()} devices matching your search`
+                    : searchError ? 'Search encountered an error' : 'No results found'
+                  }
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {searchError && (
+                  <div className="mb-4 p-3 bg-red-950/30 border border-red-900/50 rounded-lg">
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="h-4 w-4 text-red-400" />
+                      <span className="text-red-300 text-sm">{searchError}</span>
+                    </div>
+                    {searchError.includes('API key') && (
+                      <p className="text-orange-300/70 text-sm mt-2">
+                        Configure your SHODAN_API_KEY environment variable to enable live search.
+                      </p>
+                    )}
+                  </div>
+                )}
+                
+                {searchResults.length > 0 && (
+                  <div className="space-y-3">
+                    {searchResults.map((result, index) => (
+                      <div 
+                        key={index}
+                        className="p-4 border border-orange-900/30 rounded-lg bg-black/30 hover:bg-orange-950/20 transition-colors"
+                      >
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 bg-orange-950/30 rounded">
+                              <Server className="h-4 w-4 text-orange-400" />
+                            </div>
+                            <div>
+                              <h4 className="font-medium text-orange-300">
+                                {result.ip}:{result.port}
+                              </h4>
+                              <p className="text-sm text-orange-200/70">
+                                {result.product} {result.version && `v${result.version}`}
+                              </p>
+                            </div>
+                          </div>
+                          <Badge variant="outline" className="border-orange-500/50 text-orange-400">
+                            {result.transport.toUpperCase()}
+                          </Badge>
+                        </div>
+                        
+                        <div className="grid gap-2 text-sm">
+                          <div className="flex items-center gap-2">
+                            <span className="text-orange-300/60 w-20">Organization:</span>
+                            <span className="text-orange-200">{result.org}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-orange-300/60 w-20">Location:</span>
+                            <span className="text-orange-200">
+                              {result.location.city}, {result.location.country_name}
+                            </span>
+                          </div>
+                          {result.hostnames.length > 0 && (
+                            <div className="flex items-center gap-2">
+                              <span className="text-orange-300/60 w-20">Hostnames:</span>
+                              <span className="text-orange-200">
+                                {result.hostnames.slice(0, 2).join(', ')}
+                                {result.hostnames.length > 2 && ` +${result.hostnames.length - 2} more`}
+                              </span>
+                            </div>
+                          )}
+                          {result.data && (
+                            <div className="mt-2">
+                              <span className="text-orange-300/60 text-xs">Banner:</span>
+                              <pre className="text-xs text-orange-200/80 bg-black/50 p-2 rounded mt-1 overflow-x-auto">
+                                {result.data}
+                              </pre>
+                            </div>
+                          )}
+                        </div>
+                        
+                        <div className="flex items-center justify-between mt-3 pt-2 border-t border-orange-900/30">
+                          <span className="text-xs text-orange-300/50">
+                            Discovered: {new Date(result.timestamp).toLocaleDateString()}
+                          </span>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-orange-400 hover:bg-orange-950/30"
+                            onClick={() => window.open(`https://www.shodan.io/host/${result.ip}`, '_blank')}
+                          >
+                            <ExternalLink className="h-3 w-3 mr-1" />
+                            View on Shodan
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {hasSearched && searchResults.length === 0 && !searchError && (
+                  <div className="text-center py-8">
+                    <Ghost className="h-12 w-12 text-orange-500/50 mx-auto mb-4" />
+                    <p className="text-orange-300/70">No spectral entities found for this search.</p>
+                    <p className="text-orange-300/50 text-sm mt-2">Try a different incantation or check your filters.</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Common Searches and Latest Detection Potions */}
           <div className="grid gap-6 md:grid-cols-2">
             <Card className="border-orange-500/30 bg-gradient-to-r from-black/80 to-orange-950/30">
               <CardHeader>
