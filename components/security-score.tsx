@@ -2,6 +2,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 
 export function SecurityScore() {
+  // For now, return the original static version to avoid SSR issues
+  // This will be enhanced with client-side data fetching
   const score = 85
   const improvements = [
     { item: "Multi-factor authentication", status: "active", impact: "+15 points" },

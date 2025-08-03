@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { Search, Filter, Globe, Database, Server, Monitor, ExternalLink, Lightbulb, Skull, Ghost } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Search, Filter, Globe, Database, Server, Monitor, ExternalLink, Lightbulb, Skull, Ghost, MapPin, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -10,6 +10,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useCyberSearch } from "@/hooks/useApi"
+import { LoadingSpinner, ErrorAlert, EmptyState, ListLoading } from "@/components/ui/loading"
+import { CyberSearchFilters } from "@/types/api"
 
 const hauntedSearchSuggestions = [
   {
@@ -151,10 +154,26 @@ export function CyberSearchInterface() {
   const [selectedDeviceType, setSelectedDeviceType] = useState("")
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [activeTab, setActiveTab] = useState("search")
+  const [currentFilters, setCurrentFilters] = useState<CyberSearchFilters>({ query: "" })
+  const [hasSearched, setHasSearched] = useState(false)
+
+  // Use the cyber search API hook
+  const { data, isLoading, isError, error, refetch } = useCyberSearch(currentFilters)
 
   const handleSearch = () => {
-    console.log("Searching for:", searchQuery)
-    // In a real app, this would trigger an API call
+    if (!searchQuery.trim()) return
+    
+    const filters: CyberSearchFilters = {
+      query: searchQuery,
+      ...(selectedCountry && { country: selectedCountry }),
+      ...(selectedDeviceType && { service: selectedDeviceType }),
+      page: 1,
+      perPage: 20,
+    }
+    
+    setCurrentFilters(filters)
+    setHasSearched(true)
+    console.log("Searching for:", filters)
   }
 
   const handleSuggestionClick = (query: string, externalLink?: string) => {
@@ -273,6 +292,174 @@ export function CyberSearchInterface() {
               )}
             </CardContent>
           </Card>
+
+          {/* Search Results Section */}
+          {hasSearched && (
+            <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between text-orange-400">
+                  <div className="flex items-center gap-2">
+                    <Search className="h-5 w-5" />
+                    Spectral Search Results
+                  </div>
+                  {data && (
+                    <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30">
+                      {data.total} entities discovered
+                    </Badge>
+                  )}
+                </CardTitle>
+                <CardDescription className="text-orange-300/70">
+                  {currentFilters.query && `Searching for: "${currentFilters.query}"`}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {isLoading && (
+                  <div className="space-y-4">
+                    <LoadingSpinner text="Scanning the digital realm..." />
+                    <ListLoading items={5} />
+                  </div>
+                )}
+
+                {isError && (
+                  <ErrorAlert error={error || "Failed to perform search"} onRetry={() => refetch()} />
+                )}
+
+                {data && !isLoading && (
+                  <div className="space-y-4">
+                    {data.results.length === 0 ? (
+                      <EmptyState 
+                        icon="👻" 
+                        title="No digital spirits found" 
+                        description="Try different search terms or adjust your filters"
+                        action={
+                          <Button 
+                            variant="outline" 
+                            onClick={() => setShowAdvanced(true)}
+                            className="border-orange-500/50 text-orange-400 hover:bg-orange-950/30"
+                          >
+                            Adjust Filters
+                          </Button>
+                        }
+                      />
+                    ) : (
+                      <>
+                        <div className="flex items-center justify-between mb-4">
+                          <p className="text-sm text-orange-300/70">
+                            Showing {data.results.length} of {data.total} results
+                          </p>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => refetch()}
+                            className="border-orange-500/50 text-orange-400 hover:bg-orange-950/30"
+                          >
+                            Refresh Séance
+                          </Button>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          {data.results.map((result, index) => (
+                            <div
+                              key={result.id}
+                              className="p-4 border border-orange-900/30 rounded-lg hover:bg-orange-950/30 transition-colors"
+                            >
+                              <div className="flex items-start justify-between">
+                                <div className="flex-1">
+                                  <div className="flex items-center gap-3 mb-2">
+                                    <Monitor className="h-4 w-4 text-orange-500" />
+                                    <div>
+                                      <p className="font-medium text-orange-200">{result.ip}:{result.port}</p>
+                                      {result.hostname && (
+                                        <p className="text-xs text-orange-300/70">{result.hostname}</p>
+                                      )}
+                                    </div>
+                                  </div>
+                                  
+                                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-orange-300/80 mb-2">
+                                    <div className="flex items-center gap-1">
+                                      <Server className="h-3 w-3" />
+                                      {result.service}
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                      <MapPin className="h-3 w-3" />
+                                      {result.country} {result.city && `• ${result.city}`}
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                      <Clock className="h-3 w-3" />
+                                      {new Date(result.lastSeen).toLocaleDateString()}
+                                    </div>
+                                    {result.organization && (
+                                      <div className="flex items-center gap-1">
+                                        <Database className="h-3 w-3" />
+                                        {result.organization}
+                                      </div>
+                                    )}
+                                  </div>
+
+                                  {result.vulnerabilities && result.vulnerabilities.length > 0 && (
+                                    <div className="flex gap-1 mb-2">
+                                      {result.vulnerabilities.map(vuln => (
+                                        <Badge 
+                                          key={vuln} 
+                                          variant="outline" 
+                                          className="border-red-500/50 text-red-400 bg-red-950/30 text-xs"
+                                        >
+                                          {vuln}
+                                        </Badge>
+                                      ))}
+                                    </div>
+                                  )}
+
+                                  {result.banner && (
+                                    <details className="mt-2">
+                                      <summary className="cursor-pointer text-xs text-orange-400 hover:text-orange-300">
+                                        View Banner
+                                      </summary>
+                                      <pre className="mt-1 p-2 bg-black/50 rounded text-xs text-orange-200/80 whitespace-pre-wrap">
+                                        {result.banner}
+                                      </pre>
+                                    </details>
+                                  )}
+                                </div>
+                                
+                                <div className="flex gap-2">
+                                  <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30">
+                                    {result.service}
+                                  </Badge>
+                                  {result.vulnerabilities && result.vulnerabilities.length > 0 && (
+                                    <Badge variant="outline" className="border-red-500/50 text-red-400 bg-red-950/30">
+                                      {result.vulnerabilities.length} CVE
+                                    </Badge>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {data.hasMore && (
+                          <div className="text-center pt-4">
+                            <Button
+                              variant="outline"
+                              className="border-orange-500/50 text-orange-400 hover:bg-orange-950/30"
+                              onClick={() => {
+                                setCurrentFilters(prev => ({
+                                  ...prev,
+                                  page: (prev.page || 1) + 1
+                                }))
+                              }}
+                            >
+                              Load More Spirits
+                            </Button>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
 
           {/* Common Searches */}
           <div className="grid gap-6 md:grid-cols-2">
