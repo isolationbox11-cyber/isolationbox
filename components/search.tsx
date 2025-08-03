@@ -45,7 +45,7 @@ export function Search() {
           <div className="relative">
             <SearchIcon className="absolute left-4 top-4 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search through Salem's secrets..."
+              placeholder="Search through Security Eye's surveillance..."
               className="pl-10 pr-10 border-none focus-visible:ring-0 focus-visible:ring-transparent"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -69,26 +69,26 @@ export function Search() {
                 <DialogTitle>Search Results</DialogTitle>
               </DialogHeader>
               <div className="grid gap-2 py-4">
-                {search.toLowerCase() === "halloween" ? (
+                {search.toLowerCase() === "security" ? (
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between rounded-md border p-2 text-sm hover:bg-accent">
                       <div className="flex items-center gap-2">
-                        <span className="text-orange-500">🎃</span>
-                        <span>Halloween Security Tips</span>
+                        <span className="text-blue-500">👁️</span>
+                        <span>Security Surveillance Tips</span>
                       </div>
                       <span className="text-xs text-muted-foreground">Learn Mode</span>
                     </div>
                     <div className="flex items-center justify-between rounded-md border p-2 text-sm hover:bg-accent">
                       <div className="flex items-center gap-2">
-                        <span className="text-orange-500">👻</span>
-                        <span>Ghost in the Machine: Halloween Malware</span>
+                        <span className="text-blue-500">🔍</span>
+                        <span>Advanced Threat Detection: Security Eye Malware</span>
                       </div>
                       <span className="text-xs text-muted-foreground">Threats</span>
                     </div>
                     <div className="flex items-center justify-between rounded-md border p-2 text-sm hover:bg-accent">
                       <div className="flex items-center gap-2">
-                        <span className="text-orange-500">🧙</span>
-                        <span>Salem Witch Project - Honeypot Setup</span>
+                        <span className="text-blue-500">🛡️</span>
+                        <span>Security Eye Project - Advanced Monitoring Setup</span>
                       </div>
                       <span className="text-xs text-muted-foreground">Security Tools</span>
                     </div>
