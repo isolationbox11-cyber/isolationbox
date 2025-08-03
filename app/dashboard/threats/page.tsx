@@ -9,18 +9,18 @@ export default function ThreatsPage() {
         <h1 className="text-3xl font-bold tracking-tight">⚠️ Threats & Vulnerabilities</h1>
       </div>
 
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-blue-500/30 bg-gradient-to-r from-slate-950 to-blue-950">
         <CardHeader>
-          <CardTitle className="text-orange-400">🧟‍♂️ Digital Zombies Alert</CardTitle>
-          <CardDescription className="text-orange-300/70">
-            Beware of dormant threats awakening during the Halloween season
+          <CardTitle className="text-blue-400">🤖 Automated Threat Detection</CardTitle>
+          <CardDescription className="text-blue-300/70">
+            Advanced monitoring for dormant and emerging security threats
           </CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-white/70">
-            Just as zombies rise at Halloween, dormant malware can reactivate during seasonal spikes in online activity.
-            Our threat intelligence shows a 24% increase in previously dormant botnets becoming active as we approach
-            the Halloween season. Review your security measures now to avoid an unexpected cyber resurrection.
+            Our automated threat detection systems continuously monitor for dormant malware that may reactivate during periods of increased network activity.
+            Recent intelligence indicates a 24% increase in previously dormant botnets becoming active across monitored networks. 
+            Our proactive security measures help identify and neutralize these threats before they can cause damage.
           </p>
         </CardContent>
       </Card>

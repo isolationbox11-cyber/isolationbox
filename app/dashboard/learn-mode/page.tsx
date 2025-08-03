@@ -9,18 +9,18 @@ export default function LearnModePage() {
         <h1 className="text-3xl font-bold tracking-tight">📚 Learn Mode</h1>
       </div>
 
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-blue-500/30 bg-gradient-to-r from-slate-950 to-blue-950">
         <CardHeader>
-          <CardTitle className="text-orange-400">🧙‍♀️ Salem's Security Wisdom</CardTitle>
-          <CardDescription className="text-orange-300/70">
-            Ancient wisdom for modern digital protection
+          <CardTitle className="text-blue-400">👨‍💼 Professional Security Education</CardTitle>
+          <CardDescription className="text-blue-300/70">
+            Expert knowledge for comprehensive digital protection
           </CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-white/70">
-            Just as the wise women of Salem once knew which herbs provided protection, today's security experts
-            understand that knowledge is your strongest shield against digital threats. Explore our Learn Mode
-            to arm yourself with the wisdom needed to ward off cyber attacks.
+            Security professionals understand that continuous education is the foundation of effective cybersecurity. 
+            Our Learn Mode provides comprehensive training materials and expert insights to help you build robust 
+            defenses against evolving digital threats. Enhance your security knowledge and strengthen your organization's protection.
           </p>
         </CardContent>
       </Card>

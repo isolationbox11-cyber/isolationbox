@@ -88,10 +88,10 @@ module.exports = {
           "50%": { transform: "translateY(-10px)" },
         },
         "glow": {
-          "0%, 100%": { boxShadow: "0 0 5px rgba(255, 102, 0, 0.5)" },
-          "50%": { boxShadow: "0 0 20px rgba(255, 102, 0, 0.8)" },
+          "0%, 100%": { boxShadow: "0 0 5px rgba(59, 130, 246, 0.5)" },
+          "50%": { boxShadow: "0 0 20px rgba(59, 130, 246, 0.8)" },
         },
-        "spooky-pulse": {
+        "professional-pulse": {
           "0%, 100%": { opacity: 0.8 },
           "50%": { opacity: 1 },
         },
@@ -107,7 +107,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "float": "float 3s ease-in-out infinite",
         "glow": "glow 2s ease-in-out infinite",
-        "spooky-pulse": "spooky-pulse 2s ease-in-out infinite",
+        "professional-pulse": "professional-pulse 2s ease-in-out infinite",
         "eye-float": "eye-float 20s ease-in-out infinite",
       },
     },

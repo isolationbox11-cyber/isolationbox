@@ -10,18 +10,18 @@ export default function CyberSearchPage() {
 
       <CyberSearchInterface />
 
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-blue-500/30 bg-gradient-to-r from-slate-950 to-blue-950">
         <CardHeader>
-          <CardTitle className="text-orange-400">🎃 Halloween Security Tip</CardTitle>
-          <CardDescription className="text-orange-300/70">
-            Beware of phishing emails disguised as Halloween promotions or costume contests!
+          <CardTitle className="text-blue-400">🔒 Professional Security Tip</CardTitle>
+          <CardDescription className="text-blue-300/70">
+            Stay vigilant against phishing emails disguised as seasonal promotions!
           </CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-white/70">
-            Cyber criminals often take advantage of seasonal events to craft convincing phishing schemes. 
-            During Halloween, watch out for unsolicited emails offering special discounts, digital costume contests, 
-            or spooky screensavers - they might contain malware disguised as Halloween treats!
+            Cybercriminals frequently exploit seasonal events and holidays to craft convincing phishing campaigns. 
+            Always verify the authenticity of promotional emails, contest announcements, or special offers before clicking links 
+            or downloading attachments - they may contain malware disguised as legitimate communications!
           </p>
         </CardContent>
       </Card>
