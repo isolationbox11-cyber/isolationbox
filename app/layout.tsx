@@ -4,8 +4,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { FloatingEyes } from "@/components/floating-eyes"
 
 export const metadata: Metadata = {
-  title: "Salem Cyber Vault - Cybersecurity Dashboard",
-  description: "Halloween-themed cybersecurity monitoring dashboard",
+  title: "SalemCyberVault - Advanced Cybersecurity Platform",
+  description: "Blue glass themed cybersecurity monitoring dashboard with advanced threat detection",
 }
 
 export default function RootLayout({
@@ -15,12 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="halloween-bg-texture">
+      <body className="blue-glass-bg-texture">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          themes={["light", "dark", "halloween"]}
+          themes={["light", "dark", "blue-glass"]}
         >
           {children}
           <FloatingEyes />

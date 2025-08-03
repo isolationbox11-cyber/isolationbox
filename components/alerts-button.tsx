@@ -29,11 +29,11 @@ export function AlertsButton() {
           <span>Critical vulnerability detected in Windows 11</span>
         </DropdownMenuItem>
         <DropdownMenuItem className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-orange-500" />
+          <span className="h-2 w-2 rounded-full bg-sky-500" />
           <span>Suspicious login detected from Salem, MA</span>
         </DropdownMenuItem>
         <DropdownMenuItem className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-orange-500" />
+          <span className="h-2 w-2 rounded-full bg-sky-500" />
           <span>Unusual port scanning activity detected</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
