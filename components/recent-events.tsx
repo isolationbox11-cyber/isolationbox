@@ -51,30 +51,30 @@ export function RecentEvents() {
   }
 
   return (
-    <Card className="border-orange-800/30 bg-black/40">
+    <Card className="border-blue-800/30 bg-slate-900/40">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-orange-300">
+        <CardTitle className="flex items-center gap-2 text-blue-300">
           <span className="text-2xl">📊</span>
           Recent Events
         </CardTitle>
-        <CardDescription className="text-orange-200/70">
+        <CardDescription className="text-blue-200/70">
           Latest system activity and alerts
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
           {events.map((event, index) => (
-            <div key={index} className="flex items-start gap-3 p-2 rounded-lg hover:bg-orange-950/20">
-              <div className="text-xs text-orange-200/60 min-w-[3rem] mt-1">{event.time}</div>
+            <div key={index} className="flex items-start gap-3 p-2 rounded-lg hover:bg-blue-950/20">
+              <div className="text-xs text-blue-200/60 min-w-[3rem] mt-1">{event.time}</div>
               <span className="text-lg mt-0.5">{event.emoji}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
-                  <h4 className="text-sm font-medium text-orange-300">{event.type}</h4>
+                  <h4 className="text-sm font-medium text-blue-300">{event.type}</h4>
                   <Badge variant="outline" className={`${getSeverityColor(event.severity)} text-white text-xs`}>
                     {event.severity}
                   </Badge>
                 </div>
-                <p className="text-sm text-orange-100/70">{event.description}</p>
+                <p className="text-sm text-blue-100/70">{event.description}</p>
               </div>
             </div>
           ))}

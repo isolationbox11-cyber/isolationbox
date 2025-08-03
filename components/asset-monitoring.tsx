@@ -82,13 +82,13 @@ export function AssetMonitoring() {
   }
 
   return (
-    <Card className="border-orange-800/30 bg-black/40">
+    <Card className="border-blue-800/30 bg-slate-900/40">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-orange-300">
+        <CardTitle className="flex items-center gap-2 text-blue-300">
           <span className="text-2xl">🏰</span>
           Asset Monitoring
         </CardTitle>
-        <CardDescription className="text-orange-200/70">
+        <CardDescription className="text-blue-200/70">
           Security status of all network assets
         </CardDescription>
       </CardHeader>
@@ -110,15 +110,15 @@ export function AssetMonitoring() {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-medium text-orange-300">Network Assets</h4>
+            <h4 className="font-medium text-blue-300">Network Assets</h4>
             {assets.map((asset, index) => (
-              <div key={index} className="p-4 bg-orange-950/30 rounded-lg border border-orange-800/20">
+              <div key={index} className="p-4 bg-blue-950/30 rounded-lg border border-blue-800/20">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <span className="text-xl">{asset.emoji}</span>
                     <div>
-                      <h5 className="text-sm font-medium text-orange-300">{asset.name}</h5>
-                      <p className="text-xs text-orange-200/60">{asset.ip} • Last scan: {asset.lastScan}</p>
+                      <h5 className="text-sm font-medium text-blue-300">{asset.name}</h5>
+                      <p className="text-xs text-blue-200/60">{asset.ip} • Last scan: {asset.lastScan}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">

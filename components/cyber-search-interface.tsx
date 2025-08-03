@@ -166,22 +166,22 @@ export function CyberSearchInterface() {
 
   return (
     <div className="space-y-6">
-      <Alert className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950 text-orange-100">
-        <Lightbulb className="h-4 w-4 text-orange-400" />
+      <Alert className="border-blue-500/30 bg-gradient-to-r from-slate-900 to-blue-950 text-blue-100">
+        <Lightbulb className="h-4 w-4 text-blue-400" />
         <AlertDescription className="flex items-center justify-between">
           <span>
-            <span className="text-orange-400 font-bold">🔮 Salem Cyber Vault</span> allows you to search the dark corners of the internet safely. 
+            <span className="text-blue-400 font-bold">🔮 Salem Cyber Vault</span> allows you to search the dark corners of the internet safely. 
             Venture through our digital séance to discover devices and services lurking in the web's shadows.
           </span>
         </AlertDescription>
       </Alert>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="bg-black border border-orange-900/50 mx-auto mb-4">
-          <TabsTrigger value="search" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
+        <TabsList className="bg-slate-900 border border-blue-900/50 mx-auto mb-4">
+          <TabsTrigger value="search" className="data-[state=active]:bg-blue-900/30 data-[state=active]:text-blue-400">
             <Search className="h-4 w-4 mr-2" />Search Incantation
           </TabsTrigger>
-          <TabsTrigger value="spooky" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
+          <TabsTrigger value="spooky" className="data-[state=active]:bg-blue-900/30 data-[state=active]:text-blue-400">
             <Skull className="h-4 w-4 mr-2" />Spectral Searches
           </TabsTrigger>
           <TabsTrigger value="learn" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
