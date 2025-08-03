@@ -14,10 +14,10 @@ export default function LiveMapPage() {
         <ThreatMap />
       </div>
 
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-blue-500/30 bg-gradient-to-r from-black to-blue-950">
         <CardHeader>
-          <CardTitle className="text-orange-400">👻 Spectral Activity Alert</CardTitle>
-          <CardDescription className="text-orange-300/70">
+          <CardTitle className="text-blue-400">👻 Spectral Activity Alert</CardTitle>
+          <CardDescription className="text-blue-300/70">
             Unusual cyber activity detected in the Salem region
           </CardDescription>
         </CardHeader>

@@ -20,35 +20,35 @@ export function RealTimeMap() {
   }
 
   return (
-    <Card className="border-orange-800/30 bg-black/40">
+    <Card className="border-blue-800/30 bg-black/40">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-orange-300">
+        <CardTitle className="flex items-center gap-2 text-blue-300">
           <span className="text-2xl">🌍</span>
           Real-Time Attack Map
         </CardTitle>
-        <CardDescription className="text-orange-200/70">
+        <CardDescription className="text-blue-200/70">
           Live cyber threats detected worldwide
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <div className="bg-gradient-to-r from-black to-gray-900 p-6 rounded-lg border-2 border-orange-800/20">
+          <div className="bg-gradient-to-r from-black to-gray-900 p-6 rounded-lg border-2 border-blue-800/20">
             <div className="text-center mb-4">
               <div className="text-6xl animate-pulse">🗺️</div>
-              <p className="text-orange-300 mt-2">Interactive World Map</p>
-              <p className="text-xs text-orange-200/60">Real-time attack visualization would appear here</p>
+              <p className="text-blue-300 mt-2">Interactive World Map</p>
+              <p className="text-xs text-blue-200/60">Real-time attack visualization would appear here</p>
             </div>
           </div>
           
           <div className="space-y-2">
-            <h4 className="font-medium text-orange-300">Top Attack Sources (Last 24h)</h4>
+            <h4 className="font-medium text-blue-300">Top Attack Sources (Last 24h)</h4>
             {attackData.map((source, index) => (
-              <div key={index} className="flex items-center justify-between p-2 rounded-lg bg-orange-950/30">
+              <div key={index} className="flex items-center justify-between p-2 rounded-lg bg-blue-950/30">
                 <div className="flex items-center gap-3">
                   <span className="text-lg">🚩</span>
                   <div>
-                    <h5 className="text-sm font-medium text-orange-300">{source.country}</h5>
-                    <p className="text-xs text-orange-200/60">{source.attacks} attacks detected</p>
+                    <h5 className="text-sm font-medium text-blue-300">{source.country}</h5>
+                    <p className="text-xs text-blue-200/60">{source.attacks} attacks detected</p>
                   </div>
                 </div>
                 <Badge className={getSeverityColor(source.severity)}>

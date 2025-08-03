@@ -37,7 +37,7 @@ export function FloatingEyes() {
         className="absolute w-6 h-6 rounded-full bg-black top-[20vh] right-10 floating-eye opacity-60 hidden md:flex"
         style={{animationDelay: "0s"}}
       >
-        <div className="w-3 h-3 rounded-full bg-orange-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="w-3 h-3 rounded-full bg-blue-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
       </div>
       
       {/* Second eye */}
@@ -53,7 +53,7 @@ export function FloatingEyes() {
         className="absolute w-7 h-7 rounded-full bg-black top-[40vh] left-[90vw] floating-eye opacity-70 hidden md:flex"
         style={{animationDelay: "2s"}}
       >
-        <div className="w-3 h-3 rounded-full bg-orange-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="w-3 h-3 rounded-full bg-blue-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
       </div>
       
       {/* Fourth eye - appears only during Halloween month */}

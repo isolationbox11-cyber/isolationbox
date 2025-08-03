@@ -10,10 +10,10 @@ export default function CyberSearchPage() {
 
       <CyberSearchInterface />
 
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-blue-500/30 bg-gradient-to-r from-black to-blue-950">
         <CardHeader>
-          <CardTitle className="text-orange-400">🎃 Halloween Security Tip</CardTitle>
-          <CardDescription className="text-orange-300/70">
+          <CardTitle className="text-blue-400">🎃 Halloween Security Tip</CardTitle>
+          <CardDescription className="text-blue-300/70">
             Beware of phishing emails disguised as Halloween promotions or costume contests!
           </CardDescription>
         </CardHeader>

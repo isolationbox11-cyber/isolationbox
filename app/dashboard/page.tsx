@@ -14,7 +14,7 @@ export default function DashboardPage() {
         <h1 className="text-3xl font-bold tracking-tight">🎃 Dashboard</h1>
         <div className="flex items-center gap-2">
           <span className="text-sm text-muted-foreground">August 2, 2025</span>
-          <span className="text-sm text-orange-500">🎃 90 days to Halloween</span>
+          <span className="text-sm text-blue-500">🎃 90 days to Halloween</span>
         </div>
       </div>
 
@@ -25,18 +25,18 @@ export default function DashboardPage() {
       </div>
 
       {/* Halloween Promotion Card */}
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-blue-500/30 bg-gradient-to-r from-black to-blue-950">
         <CardContent className="p-6">
           <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="text-4xl animate-float">🎃</div>
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-orange-400 mb-2">Halloween Security Special</h3>
+              <h3 className="text-xl font-bold text-blue-400 mb-2">Halloween Security Special</h3>
               <p className="text-muted-foreground mb-4">
                 Protect your digital realm from spectral threats! Get our premium security package at 50% off until October 31st.
               </p>
             </div>
             <div>
-              <Button variant="default" className="bg-orange-600 hover:bg-orange-700 animate-glow">
+              <Button variant="default" className="bg-blue-600 hover:bg-blue-700 animate-glow">
                 Claim Offer
               </Button>
             </div>

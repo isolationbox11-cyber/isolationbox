@@ -11,30 +11,30 @@ export function SecurityScore() {
   ]
 
   return (
-    <Card className="border-orange-800/30 bg-black/40">
+    <Card className="border-blue-800/30 bg-black/40">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-orange-300">
+        <CardTitle className="flex items-center gap-2 text-blue-300">
           <span className="text-2xl">🛡️</span>
           Security Score
         </CardTitle>
-        <CardDescription className="text-orange-200/70">
+        <CardDescription className="text-blue-200/70">
           Your digital protection strength
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           <div className="text-center">
-            <div className="text-4xl font-bold text-orange-400 mb-2">{score}/100</div>
-            <Badge variant={score > 80 ? "default" : "destructive"} className="bg-orange-600">
+            <div className="text-4xl font-bold text-blue-400 mb-2">{score}/100</div>
+            <Badge variant={score > 80 ? "default" : "destructive"} className="bg-blue-600">
               {score > 80 ? "Strong Protection" : "Needs Improvement"}
             </Badge>
           </div>
           
           <div className="space-y-2">
-            <h4 className="font-medium text-orange-300">Security Factors</h4>
+            <h4 className="font-medium text-blue-300">Security Factors</h4>
             {improvements.map((item, index) => (
               <div key={index} className="flex items-center justify-between text-sm">
-                <span className="text-orange-100/70">{item.item}</span>
+                <span className="text-blue-100/70">{item.item}</span>
                 <div className="flex items-center gap-2">
                   <Badge 
                     variant={item.status === "active" ? "default" : "destructive"}
@@ -42,7 +42,7 @@ export function SecurityScore() {
                   >
                     {item.status === "active" ? "✓" : "!"}
                   </Badge>
-                  <span className="text-xs text-orange-200/60">{item.impact}</span>
+                  <span className="text-xs text-blue-200/60">{item.impact}</span>
                 </div>
               </div>
             ))}

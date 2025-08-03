@@ -20,7 +20,7 @@ export function UserNav() {
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             <AvatarImage src="/avatars/witch.png" alt="@witch" />
-            <AvatarFallback className="bg-orange-500">🧙</AvatarFallback>
+            <AvatarFallback className="bg-blue-500">🧙</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

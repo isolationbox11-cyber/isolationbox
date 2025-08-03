@@ -73,21 +73,21 @@ export function Search() {
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between rounded-md border p-2 text-sm hover:bg-accent">
                       <div className="flex items-center gap-2">
-                        <span className="text-orange-500">🎃</span>
+                        <span className="text-blue-500">🎃</span>
                         <span>Halloween Security Tips</span>
                       </div>
                       <span className="text-xs text-muted-foreground">Learn Mode</span>
                     </div>
                     <div className="flex items-center justify-between rounded-md border p-2 text-sm hover:bg-accent">
                       <div className="flex items-center gap-2">
-                        <span className="text-orange-500">👻</span>
+                        <span className="text-blue-500">👻</span>
                         <span>Ghost in the Machine: Halloween Malware</span>
                       </div>
                       <span className="text-xs text-muted-foreground">Threats</span>
                     </div>
                     <div className="flex items-center justify-between rounded-md border p-2 text-sm hover:bg-accent">
                       <div className="flex items-center gap-2">
-                        <span className="text-orange-500">🧙</span>
+                        <span className="text-blue-500">🧙</span>
                         <span>Salem Witch Project - Honeypot Setup</span>
                       </div>
                       <span className="text-xs text-muted-foreground">Security Tools</span>
