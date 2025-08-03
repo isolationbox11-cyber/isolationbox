@@ -9,18 +9,18 @@ export default function ThreatsPage() {
         <h1 className="text-3xl font-bold tracking-tight">⚠️ Threats & Vulnerabilities</h1>
       </div>
 
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-sky-500/30 bg-gradient-to-r from-slate-950 to-blue-950 glass-morphism">
         <CardHeader>
-          <CardTitle className="text-orange-400">🧟‍♂️ Digital Zombies Alert</CardTitle>
-          <CardDescription className="text-orange-300/70">
-            Beware of dormant threats awakening during the Halloween season
+          <CardTitle className="text-sky-400">🔍 Advanced Threat Detection</CardTitle>
+          <CardDescription className="text-sky-300/70">
+            AI-powered analysis of emerging cybersecurity threats
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-white/70">
-            Just as zombies rise at Halloween, dormant malware can reactivate during seasonal spikes in online activity.
-            Our threat intelligence shows a 24% increase in previously dormant botnets becoming active as we approach
-            the Halloween season. Review your security measures now to avoid an unexpected cyber resurrection.
+          <p className="text-sky-50/70">
+            Our advanced machine learning algorithms continuously monitor for emerging threats and vulnerabilities.
+            The SalemCyberVault platform has detected a 24% increase in sophisticated attack patterns targeting
+            enterprise networks. Our real-time protection systems have been enhanced to defend against these evolving threats.
           </p>
         </CardContent>
       </Card>

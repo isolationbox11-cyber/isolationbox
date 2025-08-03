@@ -82,13 +82,13 @@ export function AssetMonitoring() {
   }
 
   return (
-    <Card className="border-orange-800/30 bg-black/40">
+    <Card className="border-sky-800/30 bg-slate-950/40 glass-morphism">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-orange-300">
+        <CardTitle className="flex items-center gap-2 text-sky-300">
           <span className="text-2xl">🏰</span>
           Asset Monitoring
         </CardTitle>
-        <CardDescription className="text-orange-200/70">
+        <CardDescription className="text-sky-200/70">
           Security status of all network assets
         </CardDescription>
       </CardHeader>
@@ -110,15 +110,15 @@ export function AssetMonitoring() {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-medium text-orange-300">Network Assets</h4>
+            <h4 className="font-medium text-sky-300">Network Assets</h4>
             {assets.map((asset, index) => (
-              <div key={index} className="p-4 bg-orange-950/30 rounded-lg border border-orange-800/20">
+              <div key={index} className="p-4 bg-blue-950/30 rounded-lg border border-sky-800/20">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <span className="text-xl">{asset.emoji}</span>
                     <div>
-                      <h5 className="text-sm font-medium text-orange-300">{asset.name}</h5>
-                      <p className="text-xs text-orange-200/60">{asset.ip} • Last scan: {asset.lastScan}</p>
+                      <h5 className="text-sm font-medium text-sky-300">{asset.name}</h5>
+                      <p className="text-xs text-sky-200/60">{asset.ip} • Last scan: {asset.lastScan}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -126,7 +126,7 @@ export function AssetMonitoring() {
                       <div className={`text-sm font-medium ${getRiskColor(asset.riskScore)}`}>
                         Risk: {asset.riskScore}/100
                       </div>
-                      <div className="text-xs text-orange-200/60">
+                      <div className="text-xs text-sky-200/60">
                         {asset.vulnerabilities} vulnerabilities
                       </div>
                     </div>
@@ -148,13 +148,13 @@ export function AssetMonitoring() {
           </div>
 
           <div className="flex gap-2 pt-4">
-            <Button className="bg-orange-600 hover:bg-orange-700">
+            <Button className="bg-sky-600 hover:bg-sky-700">
               Scan All Assets
             </Button>
-            <Button variant="outline" className="border-orange-600 text-orange-300">
+            <Button variant="outline" className="border-sky-600 text-sky-300">
               Export Asset Report
             </Button>
-            <Button variant="outline" className="border-orange-600 text-orange-300">
+            <Button variant="outline" className="border-sky-600 text-sky-300">
               Schedule Scans
             </Button>
           </div>

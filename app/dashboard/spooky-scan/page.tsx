@@ -31,25 +31,25 @@ export default function SpookyScanPage() {
     setScanComplete(false)
     setFoundEntities([])
     
-    const spookyEntities = [
-      "Digital Ghost Process",
-      "Zombie Cookie",
-      "Phantom JavaScript",
-      "Shadow Admin Account",
-      "Spectral Service",
-      "Undead TCP Connection",
-      "Cursed Registry Key",
-      "Witch's Packet Brew",
-      "Haunted Browser Cache"
+    const systemEntities = [
+      "Orphaned Process Thread",
+      "Persistent Memory Leak",
+      "Unregistered Service Handler",
+      "Elevated Privilege Account",
+      "Background System Service", 
+      "Dormant Network Connection",
+      "Suspicious Registry Entry",
+      "Cached Authentication Token",
+      "Temporary System Cache"
     ]
     
     const interval = setInterval(() => {
       setScanProgress((prev) => {
         const newProgress = prev + 10;
         
-        // Add a spooky entity at certain progress points
+        // Add a system entity at certain progress points
         if (newProgress === 30 || newProgress === 60 || newProgress === 90) {
-          const randomEntity = spookyEntities[Math.floor(Math.random() * spookyEntities.length)]
+          const randomEntity = systemEntities[Math.floor(Math.random() * systemEntities.length)]
           setFoundEntities(prev => [...prev, randomEntity])
         }
         
@@ -67,43 +67,43 @@ export default function SpookyScanPage() {
   return (
     <div className="flex-1 space-y-6 p-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">👻 Spooky Scan</h1>
+        <h1 className="text-3xl font-bold tracking-tight">🔍 System Scanner</h1>
       </div>
       
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-sky-500/30 bg-gradient-to-r from-slate-950 to-blue-950 glass-morphism">
         <CardHeader>
-          <CardTitle className="text-orange-400 flex items-center gap-2">
-            <div className="animate-pulse text-2xl">🎃</div> Halloween Special Scanner
+          <CardTitle className="text-sky-400 flex items-center gap-2">
+            <div className="animate-pulse text-2xl">💎</div> Advanced System Scanner
           </CardTitle>
-          <CardDescription className="text-orange-300/70">
-            Detect digital ghosts, zombies, and other spooky entities haunting your system
+          <CardDescription className="text-sky-300/70">
+            AI-powered deep system analysis to detect hidden processes and anomalies
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-white/70">
-            The veil between the digital and spiritual worlds grows thin as Halloween approaches.
-            Our specialized scanner can detect paranormal digital entities that conventional security
-            tools might miss. Use with caution - you may not like what you find!
+          <p className="text-sky-50/70">
+            Our advanced scanning technology uses machine learning algorithms to detect unusual patterns
+            and hidden processes that conventional security tools might miss. This comprehensive scan
+            analyzes system behavior, network connections, and process integrity in real-time.
           </p>
           
           <div className="flex items-center gap-4 mt-4">
             <Button 
               onClick={startScan} 
               disabled={isScanning} 
-              className="bg-orange-600 hover:bg-orange-700 animate-glow"
+              className="bg-sky-600 hover:bg-sky-700 animate-glow"
             >
-              {isScanning ? "🔮 Communing with spirits..." : "🔮 Start Spooky Scan"}
+              {isScanning ? "💎 Analyzing system..." : "💎 Start Deep Scan"}
             </Button>
             {isScanning && (
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-sm text-orange-300">Scanning for paranormal entities...</span>
-                  <span className="text-sm text-orange-300">{scanProgress}%</span>
+                  <span className="text-sm text-sky-300">Scanning for system anomalies...</span>
+                  <span className="text-sm text-sky-300">{scanProgress}%</span>
                 </div>
                 <Progress value={scanProgress} className="h-2" 
                   style={{
-                    background: "rgba(255, 102, 0, 0.2)",
-                    "--tw-progress-bar-color": "rgba(255, 102, 0, 0.8)"
+                    background: "rgba(14, 165, 233, 0.2)",
+                    "--tw-progress-bar-color": "rgba(14, 165, 233, 0.8)"
                   } as React.CSSProperties} />
               </div>
             )}
@@ -111,16 +111,16 @@ export default function SpookyScanPage() {
           
           {foundEntities.length > 0 && (
             <div className="mt-6 space-y-4">
-              <h3 className="text-lg font-medium text-orange-300">👻 Paranormal Entities Detected</h3>
+              <h3 className="text-lg font-medium text-sky-300">🔍 System Anomalies Detected</h3>
               <div className="space-y-2">
                 {foundEntities.map((entity, index) => (
-                  <div key={index} className="p-3 bg-black/50 rounded-lg border border-orange-900 flex items-start gap-3 animate-pulse">
+                  <div key={index} className="p-3 bg-slate-950/50 rounded-lg border border-sky-900 flex items-start gap-3 animate-pulse">
                     <div className="text-xl">
-                      {index % 3 === 0 ? "👻" : index % 3 === 1 ? "🧟" : "🧙‍♀️"}
+                      {index % 3 === 0 ? "🔍" : index % 3 === 1 ? "⚠️" : "🔧"}
                     </div>
                     <div>
-                      <div className="font-medium text-orange-300">{entity}</div>
-                      <div className="text-xs text-orange-300/70">Haunting your system since {Math.floor(Math.random() * 30) + 1} days ago</div>
+                      <div className="font-medium text-sky-300">{entity}</div>
+                      <div className="text-xs text-sky-300/70">Active since {Math.floor(Math.random() * 30) + 1} days ago</div>
                     </div>
                   </div>
                 ))}
@@ -129,18 +129,18 @@ export default function SpookyScanPage() {
           )}
           
           {scanComplete && (
-            <div className="mt-6 p-4 bg-black/50 rounded-lg border border-orange-900">
+            <div className="mt-6 p-4 bg-slate-950/50 rounded-lg border border-sky-900">
               <div className="flex items-center gap-2 mb-2">
-                <AlertTriangle className="h-5 w-5 text-orange-500" />
-                <h3 className="text-lg font-medium text-orange-300">Scan Complete - Spiritual Analysis</h3>
+                <AlertTriangle className="h-5 w-5 text-sky-500" />
+                <h3 className="text-lg font-medium text-sky-300">Scan Complete - System Analysis</h3>
               </div>
-              <p className="text-orange-300/70 mb-4">
-                Our paranormal scan has detected {foundEntities.length} entities that exist between 
-                the digital and spectral realms. These are not conventional security threats, but may 
-                cause unusual system behavior as Halloween approaches.
+              <p className="text-sky-300/70 mb-4">
+                Our advanced scan has detected {foundEntities.length} system anomalies that require attention. 
+                These processes or configurations may impact system performance or security. 
+                Review and remediate these issues to maintain optimal system health.
               </p>
-              <Button className="bg-orange-600 hover:bg-orange-700">
-                Perform Digital Exorcism
+              <Button className="bg-sky-600 hover:bg-sky-700">
+                Start Remediation
               </Button>
             </div>
           )}
@@ -148,44 +148,44 @@ export default function SpookyScanPage() {
       </Card>
       
       <div className="grid gap-6 md:grid-cols-3">
-        <Card>
+        <Card className="glass-morphism">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Ghost className="h-5 w-5 text-orange-500" /> Digital Ghosts
+              <Ghost className="h-5 w-5 text-sky-500" /> Orphaned Processes
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              Remnants of deleted files and old user accounts that continue to haunt your system, 
-              consuming resources and occasionally manifesting as unusual system behavior.
+              Remnants of terminated applications and old user sessions that continue to consume 
+              system resources, requiring cleanup to maintain optimal performance.
             </p>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="glass-morphism">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Skull className="h-5 w-5 text-orange-500" /> Zombie Processes
+              <Skull className="h-5 w-5 text-sky-500" /> Memory Leaks
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              Terminated processes that refuse to fully die, continuing to consume system 
-              resources while exhibiting unpredictable behavior during the witching hour.
+              Applications that fail to properly release memory resources, gradually consuming 
+              available RAM and impacting system stability over time.
             </p>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="glass-morphism">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <div className="text-orange-500 text-xl">🧙‍♀️</div> Witch's Hex
+              <div className="text-sky-500 text-xl">🔧</div> Configuration Drift
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              Malicious code that activates at midnight during the full moon, causing subtle 
-              system corruptions that are difficult to diagnose through conventional means.
+              System configurations that have deviated from security baselines, potentially 
+              creating vulnerabilities that require immediate attention and remediation.
             </p>
           </CardContent>
         </Card>
