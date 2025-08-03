@@ -36,31 +36,31 @@ export function ThreatIntelligence() {
   }
 
   return (
-    <Card className="border-orange-800/30 bg-black/40">
+    <Card className="border-blue-800/30 bg-slate-900/40">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-orange-300">
+        <CardTitle className="flex items-center gap-2 text-blue-300">
           <span className="text-2xl">🕵️</span>
           Threat Intelligence
         </CardTitle>
-        <CardDescription className="text-orange-200/70">
+        <CardDescription className="text-blue-200/70">
           Latest threats in the digital realm
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           {threats.map((threat, index) => (
-            <div key={index} className="p-3 bg-orange-950/30 rounded-lg border border-orange-800/20">
+            <div key={index} className="p-3 bg-blue-950/30 rounded-lg border border-blue-800/20">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <span className="text-lg">{threat.emoji}</span>
-                  <h4 className="font-medium text-orange-300">{threat.name}</h4>
+                  <h4 className="font-medium text-blue-300">{threat.name}</h4>
                 </div>
                 <Badge className={getSeverityColor(threat.severity)}>
                   {threat.severity.toUpperCase()}
                 </Badge>
               </div>
-              <p className="text-sm text-orange-100/70 mb-2">{threat.description}</p>
-              <p className="text-xs text-orange-200/60">First seen: {threat.firstSeen}</p>
+              <p className="text-sm text-blue-100/70 mb-2">{threat.description}</p>
+              <p className="text-xs text-blue-200/60">First seen: {threat.firstSeen}</p>
             </div>
           ))}
         </div>

@@ -70,12 +70,12 @@ export default function SpookyScanPage() {
         <h1 className="text-3xl font-bold tracking-tight">👻 Spooky Scan</h1>
       </div>
       
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-blue-500/30 bg-gradient-to-r from-slate-900 to-blue-950">
         <CardHeader>
-          <CardTitle className="text-orange-400 flex items-center gap-2">
-            <div className="animate-pulse text-2xl">🎃</div> Halloween Special Scanner
+          <CardTitle className="text-blue-400 flex items-center gap-2">
+            <div className="animate-pulse text-2xl">👻</div> Halloween Special Scanner
           </CardTitle>
-          <CardDescription className="text-orange-300/70">
+          <CardDescription className="text-blue-300/70">
             Detect digital ghosts, zombies, and other spooky entities haunting your system
           </CardDescription>
         </CardHeader>
@@ -90,20 +90,20 @@ export default function SpookyScanPage() {
             <Button 
               onClick={startScan} 
               disabled={isScanning} 
-              className="bg-orange-600 hover:bg-orange-700 animate-glow"
+              className="bg-blue-600 hover:bg-blue-700 animate-glow"
             >
               {isScanning ? "🔮 Communing with spirits..." : "🔮 Start Spooky Scan"}
             </Button>
             {isScanning && (
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-sm text-orange-300">Scanning for paranormal entities...</span>
-                  <span className="text-sm text-orange-300">{scanProgress}%</span>
+                  <span className="text-sm text-blue-300">Scanning for paranormal entities...</span>
+                  <span className="text-sm text-blue-300">{scanProgress}%</span>
                 </div>
                 <Progress value={scanProgress} className="h-2" 
                   style={{
-                    background: "rgba(255, 102, 0, 0.2)",
-                    "--tw-progress-bar-color": "rgba(255, 102, 0, 0.8)"
+                    background: "rgba(65, 105, 225, 0.2)",
+                    "--tw-progress-bar-color": "rgba(65, 105, 225, 0.8)"
                   } as React.CSSProperties} />
               </div>
             )}
@@ -111,16 +111,16 @@ export default function SpookyScanPage() {
           
           {foundEntities.length > 0 && (
             <div className="mt-6 space-y-4">
-              <h3 className="text-lg font-medium text-orange-300">👻 Paranormal Entities Detected</h3>
+              <h3 className="text-lg font-medium text-blue-300">👻 Paranormal Entities Detected</h3>
               <div className="space-y-2">
                 {foundEntities.map((entity, index) => (
-                  <div key={index} className="p-3 bg-black/50 rounded-lg border border-orange-900 flex items-start gap-3 animate-pulse">
+                  <div key={index} className="p-3 bg-black/50 rounded-lg border border-blue-900 flex items-start gap-3 animate-pulse">
                     <div className="text-xl">
                       {index % 3 === 0 ? "👻" : index % 3 === 1 ? "🧟" : "🧙‍♀️"}
                     </div>
                     <div>
-                      <div className="font-medium text-orange-300">{entity}</div>
-                      <div className="text-xs text-orange-300/70">Haunting your system since {Math.floor(Math.random() * 30) + 1} days ago</div>
+                      <div className="font-medium text-blue-300">{entity}</div>
+                      <div className="text-xs text-blue-300/70">Haunting your system since {Math.floor(Math.random() * 30) + 1} days ago</div>
                     </div>
                   </div>
                 ))}
@@ -129,17 +129,17 @@ export default function SpookyScanPage() {
           )}
           
           {scanComplete && (
-            <div className="mt-6 p-4 bg-black/50 rounded-lg border border-orange-900">
+            <div className="mt-6 p-4 bg-black/50 rounded-lg border border-blue-900">
               <div className="flex items-center gap-2 mb-2">
-                <AlertTriangle className="h-5 w-5 text-orange-500" />
-                <h3 className="text-lg font-medium text-orange-300">Scan Complete - Spiritual Analysis</h3>
+                <AlertTriangle className="h-5 w-5 text-blue-500" />
+                <h3 className="text-lg font-medium text-blue-300">Scan Complete - Spiritual Analysis</h3>
               </div>
-              <p className="text-orange-300/70 mb-4">
+              <p className="text-blue-300/70 mb-4">
                 Our paranormal scan has detected {foundEntities.length} entities that exist between 
                 the digital and spectral realms. These are not conventional security threats, but may 
                 cause unusual system behavior as Halloween approaches.
               </p>
-              <Button className="bg-orange-600 hover:bg-orange-700">
+              <Button className="bg-blue-600 hover:bg-blue-700">
                 Perform Digital Exorcism
               </Button>
             </div>
@@ -151,7 +151,7 @@ export default function SpookyScanPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Ghost className="h-5 w-5 text-orange-500" /> Digital Ghosts
+              <Ghost className="h-5 w-5 text-blue-500" /> Digital Ghosts
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -165,7 +165,7 @@ export default function SpookyScanPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Skull className="h-5 w-5 text-orange-500" /> Zombie Processes
+              <Skull className="h-5 w-5 text-blue-500" /> Zombie Processes
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -179,7 +179,7 @@ export default function SpookyScanPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <div className="text-orange-500 text-xl">🧙‍♀️</div> Witch's Hex
+              <div className="text-blue-500 text-xl">🧙‍♀️</div> Witch's Hex
             </CardTitle>
           </CardHeader>
           <CardContent>
