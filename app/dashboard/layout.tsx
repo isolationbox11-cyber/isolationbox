@@ -5,6 +5,7 @@ import { UserNav } from "@/components/user-nav"
 import { Search } from "@/components/search"
 import { AlertsButton } from "@/components/alerts-button"
 import { ModeToggle } from "@/components/mode-toggle"
+import { AmbientMusicToggle } from "@/components/ambient-music-toggle"
 import { Suspense } from "react"
 import { FloatingEyes } from "@/components/floating-eyes"
 
@@ -28,6 +29,9 @@ export default function DashboardLayout({
           <div className="ml-auto flex items-center space-x-4">
             <Suspense fallback={null}>
               <Search />
+            </Suspense>
+            <Suspense fallback={null}>
+              <AmbientMusicToggle />
             </Suspense>
             <Suspense fallback={null}>
               <AlertsButton />
