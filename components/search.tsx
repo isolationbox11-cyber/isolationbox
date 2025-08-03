@@ -95,7 +95,7 @@ export function Search() {
                   </div>
                 ) : (
                   <div className="flex justify-center py-8 text-sm text-muted-foreground">
-                    No results found for "{search}"
+                    No results found for &ldquo;{search}&rdquo;
                   </div>
                 )}
               </div>

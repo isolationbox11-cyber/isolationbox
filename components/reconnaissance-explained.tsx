@@ -81,7 +81,7 @@ export function ReconnaissanceExplained() {
         <CardHeader>
           <CardTitle className="text-orange-300">
             <span className="text-2xl mr-2">🏰</span>
-            Understanding the Enemy's Scouting Methods
+            Understanding the Enemy&apos;s Scouting Methods
           </CardTitle>
           <CardDescription className="text-orange-200/70">
             Just as armies would scout Salem before an attack, cyber attackers gather information before striking.
@@ -128,7 +128,7 @@ export function ReconnaissanceExplained() {
             Protection Against Reconnaissance
           </CardTitle>
           <CardDescription className="text-orange-200/70">
-            How Salem's defenders could protect against enemy scouts
+            How Salem&apos;s defenders could protect against enemy scouts
           </CardDescription>
         </CardHeader>
         <CardContent>

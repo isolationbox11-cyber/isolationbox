@@ -24,8 +24,8 @@ export default function LiveMapPage() {
         <CardContent>
           <p className="text-white/70">
             Our sensors have detected an unusual spike in scanning activity targeting Salem-based IP addresses. 
-            This may be related to seasonal "cyber hauntings" that typically occur as we approach Halloween. 
-            We're enhancing monitoring of potentially affected systems.
+            This may be related to seasonal &ldquo;cyber hauntings&rdquo; that typically occur as we approach Halloween. 
+            We&apos;re enhancing monitoring of potentially affected systems.
           </p>
         </CardContent>
       </Card>

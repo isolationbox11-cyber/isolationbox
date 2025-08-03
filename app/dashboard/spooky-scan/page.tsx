@@ -179,7 +179,7 @@ export default function SpookyScanPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <div className="text-orange-500 text-xl">🧙‍♀️</div> Witch's Hex
+              <div className="text-orange-500 text-xl">🧙‍♀️</div> Witch&apos;s Hex
             </CardTitle>
           </CardHeader>
           <CardContent>
