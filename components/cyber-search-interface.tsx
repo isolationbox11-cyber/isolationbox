@@ -151,10 +151,29 @@ export function CyberSearchInterface() {
   const [selectedDeviceType, setSelectedDeviceType] = useState("")
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [activeTab, setActiveTab] = useState("search")
+  const [searchResults, setSearchResults] = useState<any[]>([])
+  const [searching, setSearching] = useState(false)
+  const [searchError, setSearchError] = useState<string | null>(null)
 
-  const handleSearch = () => {
-    console.log("Searching for:", searchQuery)
-    // In a real app, this would trigger an API call
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) return
+    
+    setSearching(true)
+    setSearchError(null)
+    
+    try {
+      // Import Shodan API client dynamically to avoid server-side issues
+      const { shodanAPI } = await import('@/lib/api-client')
+      const results = await shodanAPI.search(searchQuery, 20)
+      setSearchResults(results)
+      console.log("Searching for:", searchQuery, "Results:", results)
+    } catch (error) {
+      setSearchError('Search failed. Please check your API configuration.')
+      console.error('Search error:', error)
+      setSearchResults([])
+    } finally {
+      setSearching(false)
+    }
   }
 
   const handleSuggestionClick = (query: string, externalLink?: string) => {
@@ -215,9 +234,11 @@ export function CyberSearchInterface() {
                 </div>
                 <Button 
                   onClick={handleSearch} 
+                  disabled={searching || !searchQuery.trim()}
                   className="bg-orange-600 hover:bg-orange-700 animate-pulse shadow-[0_0_10px_rgba(255,102,0,0.5)]"
                 >
-                  <Search className="h-4 w-4 mr-2" />Conjure
+                  <Search className="h-4 w-4 mr-2" />
+                  {searching ? 'Conjuring...' : 'Conjure'}
                 </Button>
                 <Button 
                   variant="outline" 
@@ -273,6 +294,80 @@ export function CyberSearchInterface() {
               )}
             </CardContent>
           </Card>
+
+          {/* Search Results */}
+          {(searchResults.length > 0 || searchError || searching) && (
+            <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+              <CardHeader>
+                <CardTitle className="text-orange-400">
+                  🔮 Search Results
+                </CardTitle>
+                <CardDescription className="text-orange-300/70">
+                  {searchResults.length > 0 ? `Found ${searchResults.length} entities` : 'Searching the digital realm...'}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {searching ? (
+                  <div className="space-y-4">
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="p-4 bg-orange-950/30 rounded-lg border border-orange-800/20 animate-pulse">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-orange-600/30 rounded"></div>
+                          <div className="flex-1">
+                            <div className="w-32 h-4 bg-orange-600/30 rounded mb-2"></div>
+                            <div className="w-48 h-3 bg-orange-600/20 rounded"></div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : searchError ? (
+                  <div className="p-4 bg-red-950/30 rounded-lg border border-red-800/20">
+                    <p className="text-red-300">⚠️ {searchError}</p>
+                    <p className="text-xs text-red-200/60 mt-2">
+                      Make sure your Shodan API key is configured in your environment variables.
+                    </p>
+                  </div>
+                ) : searchResults.length > 0 ? (
+                  <div className="space-y-3 max-h-96 overflow-y-auto">
+                    {searchResults.map((result, index) => (
+                      <div key={index} className="p-4 bg-orange-950/30 rounded-lg border border-orange-800/20 hover:bg-orange-950/40 transition-colors">
+                        <div className="flex items-start gap-3">
+                          <div className="text-2xl">🖥️</div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <h4 className="font-medium text-orange-300">{result.ip}</h4>
+                              <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30">
+                                Port {result.port}
+                              </Badge>
+                              {result.country !== 'Unknown' && (
+                                <Badge variant="outline" className="border-blue-500/50 text-blue-400 bg-black/30">
+                                  {result.country}
+                                </Badge>
+                              )}
+                            </div>
+                            <p className="text-sm text-orange-100/70 mb-2">
+                              {result.product} {result.version}
+                            </p>
+                            <div className="text-xs text-orange-200/60">
+                              <p>Organization: {result.org}</p>
+                              <p>Location: {result.city}, {result.country}</p>
+                              {result.banner && (
+                                <p className="mt-1 p-2 bg-black/30 rounded font-mono text-xs">
+                                  {result.banner.substring(0, 100)}
+                                  {result.banner.length > 100 ? '...' : ''}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </CardContent>
+            </Card>
+          )}
 
           {/* Common Searches */}
           <div className="grid gap-6 md:grid-cols-2">
