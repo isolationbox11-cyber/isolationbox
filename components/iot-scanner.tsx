@@ -21,25 +21,25 @@ export function IoTScanner() {
   }
 
   return (
-    <Card className="border-orange-800/30 bg-black/40">
+    <Card className="border-blue-800/30 bg-black/40">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-orange-300">
+        <CardTitle className="flex items-center gap-2 text-blue-300">
           <span className="text-2xl">🏠</span>
           IoT Device Scanner
         </CardTitle>
-        <CardDescription className="text-orange-200/70">
+        <CardDescription className="text-blue-200/70">
           Security status of connected devices
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-3 mb-4">
           {devices.map((device, index) => (
-            <div key={index} className="flex items-center justify-between p-2 rounded-lg hover:bg-orange-950/20">
+            <div key={index} className="flex items-center justify-between p-2 rounded-lg hover:bg-blue-950/20">
               <div className="flex items-center gap-3">
                 <span className="text-lg">{device.emoji}</span>
                 <div>
-                  <h4 className="text-sm font-medium text-orange-300">{device.name}</h4>
-                  <p className="text-xs text-orange-200/60">
+                  <h4 className="text-sm font-medium text-blue-300">{device.name}</h4>
+                  <p className="text-xs text-blue-200/60">
                     Last scan: {device.lastScan} | {device.vulnerabilities} vulnerabilities
                   </p>
                 </div>
@@ -50,7 +50,7 @@ export function IoTScanner() {
             </div>
           ))}
         </div>
-        <Button className="w-full bg-orange-600 hover:bg-orange-700">
+        <Button className="w-full bg-blue-600 hover:bg-blue-700">
           Scan All Devices
         </Button>
       </CardContent>

@@ -8,22 +8,22 @@ export function ReconnaissanceExplained() {
       id: "passive",
       name: "Passive Reconnaissance",
       emoji: "👁️",
-      description: "Like watching Salem from afar without being noticed",
+      description: "Gathering intelligence without direct interaction with target systems",
       techniques: [
         {
           name: "OSINT",
-          description: "Gathering public information like reading town notices",
-          example: "Social media research, public records"
+          description: "Open Source Intelligence gathering from public sources",
+          example: "Social media research, public records, domain information"
         },
         {
           name: "DNS Enumeration",
-          description: "Learning about the town's layout from public maps",
+          description: "Discovering domain and subdomain information",
           example: "Finding subdomains and server information"
         },
         {
           name: "Social Engineering Research",
-          description: "Learning about people by listening to gossip",
-          example: "Researching employees and company culture"
+          description: "Researching targets through social and professional networks",
+          example: "Employee research and organizational structure analysis"
         }
       ]
     },
@@ -31,22 +31,22 @@ export function ReconnaissanceExplained() {
       id: "active",
       name: "Active Reconnaissance",
       emoji: "🔍",
-      description: "Like asking direct questions or testing the town gates",
+      description: "Direct interaction with target systems to gather information",
       techniques: [
         {
           name: "Port Scanning",
-          description: "Testing which doors and windows are unlocked",
-          example: "Nmap scans to find open services"
+          description: "Identifying open ports and running services",
+          example: "Nmap scans to discover accessible network services"
         },
         {
           name: "Vulnerability Scanning",
-          description: "Looking for weak spots in the town's defenses",
-          example: "Automated tools to find security flaws"
+          description: "Automated discovery of security weaknesses",
+          example: "Automated tools to identify known vulnerabilities"
         },
         {
           name: "Network Mapping",
-          description: "Drawing a detailed map of the town's layout",
-          example: "Discovering network topology and devices"
+          description: "Discovering network topology and connected devices",
+          example: "Mapping network infrastructure and device relationships"
         }
       ]
     }
@@ -56,62 +56,62 @@ export function ReconnaissanceExplained() {
     {
       title: "Detection",
       emoji: "🚨",
-      description: "Set up watchtowers (monitoring systems) to spot suspicious activity",
-      methods: ["Intrusion Detection Systems", "Log monitoring", "Network traffic analysis"]
+      description: "Implement monitoring systems to identify reconnaissance activities",
+      methods: ["Intrusion Detection Systems", "Security information and event management", "Network traffic analysis"]
     },
     {
       title: "Deception",
       emoji: "🎭",
-      description: "Use decoy buildings (honeypots) to mislead attackers",
-      methods: ["Honeypots", "False information", "Misleading network topology"]
+      description: "Deploy honeypots and decoy systems to mislead attackers",
+      methods: ["Honeypots", "False information injection", "Deceptive network topology"]
     },
     {
       title: "Limitation",
       emoji: "🛡️",
-      description: "Limit what information outsiders can discover",
-      methods: ["Minimal service exposure", "Information sanitization", "Access controls"]
+      description: "Reduce information exposure through security controls",
+      methods: ["Minimal service exposure", "Information sanitization", "Strict access controls"]
     }
   ]
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-orange-400">🕵️ Reconnaissance Explained</h2>
+      <h2 className="text-2xl font-bold text-blue-400">🔍 Reconnaissance Explained</h2>
       
-      <Card className="border-orange-800/30 bg-black/40">
+      <Card className="border-blue-800/30 bg-black/40">
         <CardHeader>
-          <CardTitle className="text-orange-300">
-            <span className="text-2xl mr-2">🏰</span>
-            Understanding the Enemy's Scouting Methods
+          <CardTitle className="text-blue-300">
+            <span className="text-2xl mr-2">👁️</span>
+            Understanding Threat Actor Intelligence Gathering
           </CardTitle>
-          <CardDescription className="text-orange-200/70">
-            Just as armies would scout Salem before an attack, cyber attackers gather information before striking.
+          <CardDescription className="text-blue-200/70">
+            How adversaries gather information about targets before launching cyber attacks.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="passive" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-orange-900/20">
-              <TabsTrigger value="passive" className="data-[state=active]:bg-orange-700">Passive</TabsTrigger>
-              <TabsTrigger value="active" className="data-[state=active]:bg-orange-700">Active</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-blue-900/20">
+              <TabsTrigger value="passive" className="data-[state=active]:bg-blue-700">Passive</TabsTrigger>
+              <TabsTrigger value="active" className="data-[state=active]:bg-blue-700">Active</TabsTrigger>
             </TabsList>
             
             {reconTypes.map((type) => (
               <TabsContent key={type.id} value={type.id} className="space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="text-2xl">{type.emoji}</span>
-                  <h3 className="text-xl font-semibold text-orange-300">{type.name}</h3>
+                  <h3 className="text-xl font-semibold text-blue-300">{type.name}</h3>
                 </div>
-                <p className="text-orange-100/70 mb-4">{type.description}</p>
+                <p className="text-blue-100/70 mb-4">{type.description}</p>
                 
                 <div className="grid gap-3">
                   {type.techniques.map((technique, index) => (
-                    <div key={index} className="p-3 bg-orange-950/30 rounded-lg border border-orange-800/20">
+                    <div key={index} className="p-3 bg-blue-950/30 rounded-lg border border-blue-800/20">
                       <div className="flex items-center gap-2 mb-2">
-                        <Badge variant="outline" className="border-orange-600 text-orange-300">
+                        <Badge variant="outline" className="border-blue-600 text-blue-300">
                           {technique.name}
                         </Badge>
                       </div>
-                      <p className="text-sm text-orange-100/80 mb-1">{technique.description}</p>
-                      <p className="text-xs text-orange-100/60">{technique.example}</p>
+                      <p className="text-sm text-blue-100/80 mb-1">{technique.description}</p>
+                      <p className="text-xs text-blue-100/60">{technique.example}</p>
                     </div>
                   ))}
                 </div>
@@ -121,28 +121,28 @@ export function ReconnaissanceExplained() {
         </CardContent>
       </Card>
 
-      <Card className="border-orange-800/30 bg-black/40">
+      <Card className="border-blue-800/30 bg-black/40">
         <CardHeader>
-          <CardTitle className="text-orange-300">
+          <CardTitle className="text-blue-300">
             <span className="text-2xl mr-2">🛡️</span>
             Protection Against Reconnaissance
           </CardTitle>
-          <CardDescription className="text-orange-200/70">
-            How Salem's defenders could protect against enemy scouts
+          <CardDescription className="text-blue-200/70">
+            Defensive strategies to prevent and detect reconnaissance activities
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-3">
             {protectionMethods.map((method, index) => (
-              <div key={index} className="p-4 bg-orange-950/30 rounded-lg border border-orange-800/20">
+              <div key={index} className="p-4 bg-blue-950/30 rounded-lg border border-blue-800/20">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">{method.emoji}</span>
-                  <h4 className="font-semibold text-orange-300">{method.title}</h4>
+                  <h4 className="font-semibold text-blue-300">{method.title}</h4>
                 </div>
-                <p className="text-sm text-orange-100/70 mb-3">{method.description}</p>
+                <p className="text-sm text-blue-100/70 mb-3">{method.description}</p>
                 <div className="space-y-1">
                   {method.methods.map((item, i) => (
-                    <div key={i} className="text-xs text-orange-100/60">• {item}</div>
+                    <div key={i} className="text-xs text-blue-100/60">• {item}</div>
                   ))}
                 </div>
               </div>
