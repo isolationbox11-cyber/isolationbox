@@ -11,14 +11,14 @@ export default function LearnModePage() {
 
       <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
         <CardHeader>
-          <CardTitle className="text-orange-400">🧙‍♀️ Salem's Security Wisdom</CardTitle>
+          <CardTitle className="text-orange-400">🧙‍♀️ Salem&apos;s Security Wisdom</CardTitle>
           <CardDescription className="text-orange-300/70">
             Ancient wisdom for modern digital protection
           </CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-white/70">
-            Just as the wise women of Salem once knew which herbs provided protection, today's security experts
+            Just as the wise women of Salem once knew which herbs provided protection, today&apos;s security experts
             understand that knowledge is your strongest shield against digital threats. Explore our Learn Mode
             to arm yourself with the wisdom needed to ward off cyber attacks.
           </p>

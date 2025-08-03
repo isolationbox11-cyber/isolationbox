@@ -171,7 +171,7 @@ export function CyberSearchInterface() {
         <AlertDescription className="flex items-center justify-between">
           <span>
             <span className="text-orange-400 font-bold">🔮 Salem Cyber Vault</span> allows you to search the dark corners of the internet safely. 
-            Venture through our digital séance to discover devices and services lurking in the web's shadows.
+            Venture through our digital séance to discover devices and services lurking in the web&apos;s shadows.
           </span>
         </AlertDescription>
       </Alert>
@@ -282,7 +282,7 @@ export function CyberSearchInterface() {
                   🔍 Common Haunted Searches
                 </CardTitle>
                 <CardDescription className="text-orange-300/70">
-                  Discover digital entities lurking in the internet's shadows
+                  Discover digital entities lurking in the internet&apos;s shadows
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -410,7 +410,7 @@ export function CyberSearchInterface() {
             </CardHeader>
             <CardContent className="prose prose-invert max-w-none">
               <div className="p-4 border border-red-900/50 rounded-lg bg-black/30">
-                <h4 className="text-red-400 text-lg mt-0">The Digital Witch's Code</h4>
+                <h4 className="text-red-400 text-lg mt-0">The Digital Witch&apos;s Code</h4>
                 <ul className="text-sm text-orange-200/90 space-y-2">
                   <li>Only observe publicly accessible devices - never attempt to breach or access protected systems</li>
                   <li>Respect privacy - do not access personal cameras or private information</li>
@@ -429,7 +429,7 @@ export function CyberSearchInterface() {
         <TabsContent value="learn" className="space-y-4">
           <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
             <CardHeader>
-              <CardTitle className="text-orange-400">🎓 The Paranormal Investigator's Guide</CardTitle>
+              <CardTitle className="text-orange-400">🎓 The Paranormal Investigator&apos;s Guide</CardTitle>
               <CardDescription className="text-orange-300/70">
                 Understanding the mysteries of cyber search for beginners
               </CardDescription>
@@ -447,7 +447,7 @@ export function CyberSearchInterface() {
                       </p>
                       <div className="mt-4 p-3 bg-orange-950/20 rounded-lg border border-orange-900/30">
                         <p className="text-xs text-orange-300">
-                          <span className="font-bold">Everyday example:</span> It's like having a magical map that shows you all the doorways that are visible from the street in your town - you can see they exist, but you're just observing, not entering.
+                          <span className="font-bold">Everyday example:</span> It&apos;s like having a magical map that shows you all the doorways that are visible from the street in your town - you can see they exist, but you&apos;re just observing, not entering.
                         </p>
                       </div>
                     </CardContent>
@@ -471,7 +471,7 @@ export function CyberSearchInterface() {
                         <p className="text-xs text-orange-200/80">Finds cameras connected to the internet</p>
                       </div>
                       <div>
-                        <Badge variant="outline" className="border-orange-500/50 text-orange-400 mb-1">org:"Company Name"</Badge>
+                        <Badge variant="outline" className="border-orange-500/50 text-orange-400 mb-1">org:&ldquo;Company Name&rdquo;</Badge>
                         <p className="text-xs text-orange-200/80">Finds devices belonging to an organization</p>
                       </div>
                     </CardContent>
@@ -485,12 +485,12 @@ export function CyberSearchInterface() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-orange-200/80">
-                        Yes! Cyber search is completely legal when used properly. You're only viewing publicly available information about devices that are already exposed to the internet. Think of it like walking down a public street and observing the houses - you can see they're there, but you're not going inside.
+                        Yes! Cyber search is completely legal when used properly. You&apos;re only viewing publicly available information about devices that are already exposed to the internet. Think of it like walking down a public street and observing the houses - you can see they&apos;re there, but you&apos;re not going inside.
                       </p>
                       <div className="mt-4 p-3 bg-red-950/20 rounded-lg border border-red-900/30">
                         <p className="text-xs text-red-300 font-bold">Important:</p>
                         <p className="text-xs text-orange-300 mt-1">
-                          Never attempt to access, log into, or breach any systems you discover. Only observe what's publicly visible. Unauthorized access is illegal and unethical.
+                          Never attempt to access, log into, or breach any systems you discover. Only observe what&apos;s publicly visible. Unauthorized access is illegal and unethical.
                         </p>
                       </div>
                     </CardContent>
