@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Filter, Globe, Database, Server, Monitor, ExternalLink, Lightbulb, Skull, Ghost } from "lucide-react"
+import { Search, Filter, Globe, Database, Server, Monitor, ExternalLink, Lightbulb, Skull, Ghost, Eye } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ZoomEyeInterface } from "@/components/zoomeye-interface"
 
 const hauntedSearchSuggestions = [
   {
@@ -180,6 +181,9 @@ export function CyberSearchInterface() {
         <TabsList className="bg-black border border-orange-900/50 mx-auto mb-4">
           <TabsTrigger value="search" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
             <Search className="h-4 w-4 mr-2" />Search Incantation
+          </TabsTrigger>
+          <TabsTrigger value="zoomeye" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
+            <Eye className="h-4 w-4 mr-2" />ZoomEye Live
           </TabsTrigger>
           <TabsTrigger value="spooky" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
             <Skull className="h-4 w-4 mr-2" />Spectral Searches
@@ -358,6 +362,10 @@ export function CyberSearchInterface() {
               </CardContent>
             </Card>
           </div>
+        </TabsContent>
+        
+        <TabsContent value="zoomeye" className="space-y-4">
+          <ZoomEyeInterface />
         </TabsContent>
         
         <TabsContent value="spooky" className="space-y-4">
