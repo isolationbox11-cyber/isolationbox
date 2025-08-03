@@ -1,0 +1,32 @@
+name: Unzip All ZIP Files On Push
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find all ZIPs and extract them
+        run: |
+          find . -name '*.zip' | while read zipfile; do
+            echo "Extracting $zipfile..."
+            unzip -o "$zipfile" -d .
+          done
+
+      - name: List files after extraction
+        run: ls -l
+
+      - name: Commit and push extracted files
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "github-actions"
+          git add .
+          git commit -am "Extracted all ZIP files automatically via GitHub Actions" || echo "No changes to commit"
+          git push
