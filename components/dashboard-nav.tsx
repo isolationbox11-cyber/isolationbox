@@ -15,7 +15,8 @@ import {
   Lock, 
   Search, 
   Shield, 
-  Skull 
+  Skull,
+  Compass
 } from "lucide-react"
 
 const links = [
@@ -23,6 +24,11 @@ const links = [
     name: "Dashboard",
     href: "/dashboard",
     icon: Home
+  },
+  {
+    name: "Discover & Learn",
+    href: "/dashboard/discover",
+    icon: Compass
   },
   {
     name: "Cyber Search",
