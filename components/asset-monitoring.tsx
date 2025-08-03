@@ -1,11 +1,35 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { RefreshCw, AlertTriangle, Wifi, Server, HardDrive } from "lucide-react"
-import { useAssetMonitoring } from "@/lib/hooks"
+import { useState, useEffect } from "react"
+import { cyberAPI } from "@/lib/cyber-api"
 
 export function AssetMonitoring() {
-  const { data, loading, error, refetch } = useAssetMonitoring()
+  const [data, setData] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      const result = await cyberAPI.getAssetStatus()
+      setData(result)
+      setError(null)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch asset data')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+    const interval = setInterval(fetchData, 120000) // Refresh every 2 minutes
+    return () => clearInterval(interval)
+  }, [])
   
   const assets = data?.assets || []
   const totalAssets = data?.totalAssets || 0
@@ -61,7 +85,7 @@ export function AssetMonitoring() {
           <Button 
             variant="ghost" 
             size="sm" 
-            onClick={refetch}
+            onClick={fetchData}
             disabled={loading}
             className="text-orange-400 hover:text-orange-300"
           >
@@ -148,7 +172,7 @@ export function AssetMonitoring() {
           <div className="flex gap-2 pt-4">
             <Button 
               className="bg-orange-600 hover:bg-orange-700"
-              onClick={refetch}
+              onClick={fetchData}
               disabled={loading}
             >
               {loading ? 'Scanning...' : 'Scan Network'}

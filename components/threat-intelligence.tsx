@@ -1,11 +1,35 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { RefreshCw, AlertTriangle } from "lucide-react"
-import { useThreatIntelligence } from "@/lib/hooks"
+import { useState, useEffect } from "react"
+import { cyberAPI } from "@/lib/cyber-api"
 
 export function ThreatIntelligence() {
-  const { data, loading, error, refetch } = useThreatIntelligence()
+  const [data, setData] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      const result = await cyberAPI.getThreatIntelligence()
+      setData(result)
+      setError(null)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch threat intelligence')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+    const interval = setInterval(fetchData, 30000) // Refresh every 30 seconds
+    return () => clearInterval(interval)
+  }, [])
   
   const threats = data?.threats || []
 
@@ -38,7 +62,7 @@ export function ThreatIntelligence() {
           <Button 
             variant="ghost" 
             size="sm" 
-            onClick={refetch}
+            onClick={fetchData}
             disabled={loading}
             className="text-orange-400 hover:text-orange-300"
           >
