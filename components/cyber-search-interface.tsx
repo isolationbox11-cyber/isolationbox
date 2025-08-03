@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Filter, Globe, Database, Server, Monitor, ExternalLink, Lightbulb, Skull, Ghost } from "lucide-react"
+import { Search, Filter, Globe, Database, Server, Monitor, ExternalLink, Lightbulb, Skull, Ghost, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -10,6 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useGoogleSearch } from "@/lib/hooks/use-google-search"
+import { GoogleSearchResults } from "@/components/google-search-results"
 
 const hauntedSearchSuggestions = [
   {
@@ -150,11 +152,69 @@ export function CyberSearchInterface() {
   const [selectedCountry, setSelectedCountry] = useState("")
   const [selectedDeviceType, setSelectedDeviceType] = useState("")
   const [showAdvanced, setShowAdvanced] = useState(false)
-  const [activeTab, setActiveTab] = useState("search")
+  const [activeTab, setActiveTab] = useState("google")
+  const [googleSearchQuery, setGoogleSearchQuery] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
+
+  // Google Custom Search hook
+  const {
+    search: googleSearch,
+    searchSecurity: googleSecuritySearch,
+    isLoading: googleLoading,
+    results: googleResults,
+    error: googleError,
+    hasResults: hasGoogleResults,
+    totalResults: googleTotalResults,
+    searchTime: googleSearchTime,
+    clearResults: clearGoogleResults,
+  } = useGoogleSearch()
 
   const handleSearch = () => {
     console.log("Searching for:", searchQuery)
     // In a real app, this would trigger an API call
+  }
+
+  const handleGoogleSearch = async () => {
+    if (!googleSearchQuery.trim()) return
+    
+    try {
+      setCurrentPage(1)
+      await googleSearch({
+        query: googleSearchQuery,
+        startIndex: 1,
+        count: 10,
+      })
+    } catch (error) {
+      console.error("Google search failed:", error)
+    }
+  }
+
+  const handleGoogleSecuritySearch = async () => {
+    if (!googleSearchQuery.trim()) return
+    
+    try {
+      setCurrentPage(1)
+      await googleSecuritySearch(googleSearchQuery, 1, 10)
+    } catch (error) {
+      console.error("Google security search failed:", error)
+    }
+  }
+
+  const handleLoadMoreGoogle = async () => {
+    if (!googleSearchQuery.trim() || googleLoading) return
+    
+    try {
+      const nextPage = currentPage + 1
+      const startIndex = (nextPage - 1) * 10 + 1
+      await googleSearch({
+        query: googleSearchQuery,
+        startIndex,
+        count: 10,
+      })
+      setCurrentPage(nextPage)
+    } catch (error) {
+      console.error("Load more Google results failed:", error)
+    }
   }
 
   const handleSuggestionClick = (query: string, externalLink?: string) => {
@@ -178,6 +238,9 @@ export function CyberSearchInterface() {
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="bg-black border border-orange-900/50 mx-auto mb-4">
+          <TabsTrigger value="google" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
+            <Zap className="h-4 w-4 mr-2" />Google Search
+          </TabsTrigger>
           <TabsTrigger value="search" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
             <Search className="h-4 w-4 mr-2" />Search Incantation
           </TabsTrigger>
@@ -188,6 +251,134 @@ export function CyberSearchInterface() {
             <Ghost className="h-4 w-4 mr-2" />Paranormal Guide
           </TabsTrigger>
         </TabsList>
+        
+        <TabsContent value="google" className="space-y-4">
+          {/* Google Custom Search Interface */}
+          <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-orange-400">
+                <Zap className="h-5 w-5" />
+                Google Web Search Portal
+              </CardTitle>
+              <CardDescription className="text-orange-300/70">
+                Search the vast web using Google's mystical indexing powers
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Google Search Bar */}
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-orange-500/70" />
+                  <Input
+                    placeholder="Enter your web search query (e.g., 'cybersecurity best practices', 'malware analysis')..."
+                    value={googleSearchQuery}
+                    onChange={(e) => setGoogleSearchQuery(e.target.value)}
+                    className="pl-10 bg-black/50 border-orange-900/50 text-orange-100 placeholder:text-orange-300/50 focus-visible:ring-orange-500/30 focus-visible:border-orange-500/50"
+                    onKeyPress={(e) => e.key === "Enter" && handleGoogleSearch()}
+                  />
+                </div>
+                <Button 
+                  onClick={handleGoogleSearch} 
+                  disabled={!googleSearchQuery.trim() || googleLoading}
+                  className="bg-orange-600 hover:bg-orange-700 animate-pulse shadow-[0_0_10px_rgba(255,102,0,0.5)]"
+                >
+                  <Search className="h-4 w-4 mr-2" />
+                  {googleLoading ? "Searching..." : "Search Web"}
+                </Button>
+                <Button 
+                  onClick={handleGoogleSecuritySearch}
+                  disabled={!googleSearchQuery.trim() || googleLoading}
+                  variant="outline" 
+                  className="border-orange-500/50 text-orange-400 hover:bg-orange-950"
+                >
+                  <Skull className="h-4 w-4 mr-2" />
+                  Security Focus
+                </Button>
+              </div>
+
+              {/* Clear Results Button */}
+              {hasGoogleResults && (
+                <div className="flex justify-end">
+                  <Button 
+                    onClick={clearGoogleResults}
+                    variant="ghost" 
+                    size="sm"
+                    className="text-orange-400/70 hover:text-orange-400 hover:bg-orange-950/30"
+                  >
+                    Clear Results
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Google Search Results */}
+          {(hasGoogleResults || googleLoading || googleError) && (
+            <GoogleSearchResults
+              results={googleResults}
+              isLoading={googleLoading}
+              error={googleError}
+              onLoadMore={handleLoadMoreGoogle}
+              hasMore={googleResults?.queries?.nextPage?.[0] !== undefined}
+            />
+          )}
+
+          {/* Google Search Tips */}
+          <Card className="border-orange-500/30 bg-gradient-to-r from-black/80 to-orange-950/30">
+            <CardHeader>
+              <CardTitle className="text-lg text-orange-400 flex items-center gap-2">
+                💡 Web Search Enchantments
+              </CardTitle>
+              <CardDescription className="text-orange-300/70">
+                Tips for more effective web searches
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-3">
+                  <h4 className="text-orange-300 font-medium">Security Research Queries:</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30 text-xs">
+                        "SQL injection prevention"
+                      </Badge>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30 text-xs">
+                        CVE-2023 vulnerability
+                      </Badge>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30 text-xs">
+                        "malware analysis tools"
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <h4 className="text-orange-300 font-medium">Advanced Operators:</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30 text-xs">
+                        site:github.com security
+                      </Badge>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30 text-xs">
+                        filetype:pdf cybersecurity
+                      </Badge>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30 text-xs">
+                        "penetration testing" -ads
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
         
         <TabsContent value="search" className="space-y-4">
           {/* Main Search Interface */}
