@@ -9,18 +9,18 @@ export default function ThreatsPage() {
         <h1 className="text-3xl font-bold tracking-tight">⚠️ Threats & Vulnerabilities</h1>
       </div>
 
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-blue-500/30 bg-gradient-to-r from-black to-blue-950">
         <CardHeader>
-          <CardTitle className="text-orange-400">🧟‍♂️ Digital Zombies Alert</CardTitle>
-          <CardDescription className="text-orange-300/70">
-            Beware of dormant threats awakening during the Halloween season
+          <CardTitle className="text-blue-400">🛡️ Advanced Threat Detection</CardTitle>
+          <CardDescription className="text-blue-300/70">
+            Comprehensive monitoring for emerging cyber threats and vulnerabilities
           </CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-white/70">
-            Just as zombies rise at Halloween, dormant malware can reactivate during seasonal spikes in online activity.
-            Our threat intelligence shows a 24% increase in previously dormant botnets becoming active as we approach
-            the Halloween season. Review your security measures now to avoid an unexpected cyber resurrection.
+            Our advanced threat intelligence systems continuously monitor for emerging vulnerabilities and active threats.
+            Real-time analysis of global threat patterns shows a 24% increase in targeted attacks on critical infrastructure.
+            Enhanced security measures and proactive monitoring are essential for maintaining robust defense postures.
           </p>
         </CardContent>
       </Card>
