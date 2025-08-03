@@ -14,18 +14,18 @@ export default function LiveMapPage() {
         <ThreatMap />
       </div>
 
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      <Card className="border-sky-500/30 bg-gradient-to-r from-slate-950 to-blue-950 glass-morphism">
         <CardHeader>
-          <CardTitle className="text-orange-400">👻 Spectral Activity Alert</CardTitle>
-          <CardDescription className="text-orange-300/70">
-            Unusual cyber activity detected in the Salem region
+          <CardTitle className="text-sky-400">💎 Advanced Monitoring Alert</CardTitle>
+          <CardDescription className="text-sky-300/70">
+            Enhanced threat detection active in your region
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-white/70">
-            Our sensors have detected an unusual spike in scanning activity targeting Salem-based IP addresses. 
-            This may be related to seasonal "cyber hauntings" that typically occur as we approach Halloween. 
-            We're enhancing monitoring of potentially affected systems.
+          <p className="text-sky-50/70">
+            Our advanced AI sensors have detected increased scanning activity targeting systems in your region. 
+            The SalemCyberVault platform has automatically enhanced monitoring protocols and deployed additional 
+            defensive measures to protect against potential threats.
           </p>
         </CardContent>
       </Card>

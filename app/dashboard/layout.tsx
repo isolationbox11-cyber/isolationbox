@@ -9,8 +9,8 @@ import { Suspense } from "react"
 import { FloatingEyes } from "@/components/floating-eyes"
 
 export const metadata: Metadata = {
-  title: "Dashboard - Salem Cyber Vault",
-  description: "Cybersecurity monitoring dashboard with Halloween theme",
+  title: "Dashboard - SalemCyberVault",
+  description: "Advanced cybersecurity monitoring dashboard with blue glass theme",
 }
 
 export default function DashboardLayout({
@@ -23,7 +23,7 @@ export default function DashboardLayout({
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold">🎃 Salem Cyber Vault</h1>
+            <h1 className="text-xl font-bold">💎 SalemCyberVault</h1>
           </div>
           <div className="ml-auto flex items-center space-x-4">
             <Suspense fallback={null}>
@@ -42,7 +42,7 @@ export default function DashboardLayout({
         </div>
       </div>
       <div className="flex">
-        <aside className="w-64 border-r min-h-[calc(100vh-4rem)]">
+        <aside className="w-64 border-r min-h-[calc(100vh-4rem)]" data-onboarding-target="navigation-menu">
           <DashboardNav />
         </aside>
         <main className="flex-1">{children}</main>

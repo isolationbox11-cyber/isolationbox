@@ -6,38 +6,44 @@ import { RecentEvents } from "@/components/recent-events"
 import { AlertsOverview } from "@/components/alerts-overview"
 import { SystemStatus } from "@/components/system-status"
 import { IoTScanner } from "@/components/iot-scanner"
+import { OnboardingFlow } from "@/components/onboarding-flow"
 
 export default function DashboardPage() {
   return (
     <div className="flex-1 space-y-6 p-8">
+      <OnboardingFlow />
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">🎃 Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight" data-onboarding-target="dashboard-title">💎 Dashboard</h1>
         <div className="flex items-center gap-2">
           <span className="text-sm text-muted-foreground">August 2, 2025</span>
-          <span className="text-sm text-orange-500">🎃 90 days to Halloween</span>
+          <span className="text-sm text-sky-500">💎 Advanced Security Active</span>
         </div>
       </div>
 
       {/* Top row - Security Score and Threat Intelligence */}
       <div className="grid gap-6 md:grid-cols-2">
-        <SecurityScore />
-        <ThreatIntelligence />
+        <div data-onboarding-target="security-score">
+          <SecurityScore />
+        </div>
+        <div data-onboarding-target="threat-intelligence">
+          <ThreatIntelligence />
+        </div>
       </div>
 
-      {/* Halloween Promotion Card */}
-      <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+      {/* Blue Glass Promotion Card */}
+      <Card className="border-sky-500/30 bg-gradient-to-r from-slate-950 to-blue-950 glass-morphism">
         <CardContent className="p-6">
           <div className="flex flex-col md:flex-row gap-6 items-center">
-            <div className="text-4xl animate-float">🎃</div>
+            <div className="text-4xl animate-float">💎</div>
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-orange-400 mb-2">Halloween Security Special</h3>
+              <h3 className="text-xl font-bold text-sky-400 mb-2">Advanced Security Suite</h3>
               <p className="text-muted-foreground mb-4">
-                Protect your digital realm from spectral threats! Get our premium security package at 50% off until October 31st.
+                Protect your digital assets with our cutting-edge security platform! Experience real-time threat detection and advanced analytics.
               </p>
             </div>
             <div>
-              <Button variant="default" className="bg-orange-600 hover:bg-orange-700 animate-glow">
-                Claim Offer
+              <Button variant="default" className="bg-sky-600 hover:bg-sky-700 animate-glow">
+                Explore Features
               </Button>
             </div>
           </div>

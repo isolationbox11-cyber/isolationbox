@@ -88,8 +88,8 @@ module.exports = {
           "50%": { transform: "translateY(-10px)" },
         },
         "glow": {
-          "0%, 100%": { boxShadow: "0 0 5px rgba(255, 102, 0, 0.5)" },
-          "50%": { boxShadow: "0 0 20px rgba(255, 102, 0, 0.8)" },
+          "0%, 100%": { boxShadow: "0 0 5px rgba(14, 165, 233, 0.5)" },
+          "50%": { boxShadow: "0 0 20px rgba(14, 165, 233, 0.8), 0 0 30px rgba(56, 189, 248, 0.3)" },
         },
         "spooky-pulse": {
           "0%, 100%": { opacity: 0.8 },
