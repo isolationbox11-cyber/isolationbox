@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Leaflet CSS - required for map functionality */
+@import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+
 @layer base {
   :root {
     --background: oklch(1 0 0);
@@ -173,4 +176,70 @@
 
 .halloween .spooky-icon {
   animation: spooky-pulse 2s ease-in-out infinite;
+}
+
+/* Threat Map Styles */
+.threat-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  width: auto !important;
+}
+
+.leaflet-popup-tip {
+  background: #ea580c !important;
+  box-shadow: none !important;
+}
+
+.threat-popup .leaflet-popup-close-button {
+  color: #fed7aa !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  top: 8px !important;
+  right: 8px !important;
+}
+
+/* Custom animations for threat markers */
+@keyframes threat-pulse-critical {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); 
+  }
+  50% { 
+    transform: scale(1.1); 
+    box-shadow: 0 0 0 10px rgba(220, 38, 38, 0.2); 
+  }
+}
+
+@keyframes threat-pulse-high {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.3); 
+  }
+  50% { 
+    transform: scale(1.05); 
+    box-shadow: 0 0 0 8px rgba(234, 88, 12, 0.15); 
+  }
+}
+
+@keyframes threat-pulse-medium {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes threat-pulse-low {
+  0%, 100% { transform: scale(1); }
+}
+
+.leaflet-container {
+  background: #000000 !important;
 }
