@@ -96,7 +96,7 @@ export function DashboardNav() {
             <link.icon className={cn(
               "mr-3 h-4 w-4",
               isActive 
-                ? "text-orange-500" 
+                ? "text-blue-500" 
                 : "text-muted-foreground group-hover:text-foreground"
             )} />
             {link.name}
@@ -112,11 +112,11 @@ export function DashboardNav() {
       <div className="mt-8 p-4 border-t">
         <div className="bg-muted/50 rounded-md p-3">
           <div className="flex items-center">
-            <Lock className="h-4 w-4 text-orange-500 mr-2" />
-            <h4 className="text-sm font-medium">Halloween Special</h4>
+            <Lock className="h-4 w-4 text-blue-500 mr-2" />
+            <h4 className="text-sm font-medium">Enterprise Upgrade</h4>
           </div>
           <p className="text-xs text-muted-foreground mt-1">
-            Unlock all premium features until October 31st! 🎃
+            Unlock all premium features with our enterprise package! 🛡️
           </p>
         </div>
       </div>

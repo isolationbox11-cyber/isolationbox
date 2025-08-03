@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-const hauntedSearchSuggestions = [
+const securitySearchSuggestions = [
   {
     query: "camera",
     description: "Find security cameras and webcams",
@@ -68,9 +68,9 @@ const hauntedSearchSuggestions = [
   },
 ]
 
-const spookySearchDorks = [
+const professionalSearchDorks = [
   {
-    name: "IoT Ghosts",
+    name: "IoT Devices",
     query: "Server: IoT port:80",
     risk: "Medium",
     externalLink: "https://www.shodan.io/search?query=Server%3A+IoT+port%3A80",
@@ -78,7 +78,7 @@ const spookySearchDorks = [
       "IoT (Internet of Things) devices with web interfaces. These are often security cameras, routers, or smart home devices with weak security.",
   },
   {
-    name: "Haunted Webcams",
+    name: "Web Cameras",
     query: "webcamxp",
     risk: "High",
     externalLink: "https://www.shodan.io/search?query=webcamxp",
@@ -86,7 +86,7 @@ const spookySearchDorks = [
       "WebcamXP is software for managing webcams. Many instances are publicly accessible without passwords!",
   },
   {
-    name: "Zombie Databases",
+    name: "Database Servers",
     query: "MongoDB port:27017",
     risk: "Critical",
     externalLink: "https://www.shodan.io/search?query=MongoDB+port%3A27017",
@@ -94,7 +94,7 @@ const spookySearchDorks = [
       "MongoDB databases that are directly accessible from the internet. These often contain sensitive data and might not require authentication.",
   },
   {
-    name: "Cursed Routers",
+    name: "Network Routers",
     query: "router unconfigured",
     risk: "Medium",
     externalLink: "https://www.shodan.io/search?query=router+unconfigured",
@@ -102,7 +102,7 @@ const spookySearchDorks = [
       "Routers that might still use default settings or passwords. These could be vulnerable to attacks!",
   },
   {
-    name: "Phantom Services",
+    name: "Search Services",
     query: "port:9200 elastic",
     risk: "High",
     externalLink: "https://www.shodan.io/search?query=port%3A9200+elastic",
@@ -110,7 +110,7 @@ const spookySearchDorks = [
       "Elasticsearch databases that might be accessible without authentication. These often contain sensitive logs and data.",
   },
   {
-    name: "Cryptic Crawlers",
+    name: "Crypto Nodes",
     query: "bitcoin port:8333",
     risk: "Low",
     externalLink: "https://www.shodan.io/search?query=bitcoin+port%3A8333",
@@ -166,63 +166,63 @@ export function CyberSearchInterface() {
 
   return (
     <div className="space-y-6">
-      <Alert className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950 text-orange-100">
-        <Lightbulb className="h-4 w-4 text-orange-400" />
+      <Alert className="border-blue-500/30 bg-gradient-to-r from-slate-950 to-blue-950 text-blue-100">
+        <Lightbulb className="h-4 w-4 text-blue-400" />
         <AlertDescription className="flex items-center justify-between">
           <span>
-            <span className="text-orange-400 font-bold">🔮 Salem Cyber Vault</span> allows you to search the dark corners of the internet safely. 
-            Venture through our digital séance to discover devices and services lurking in the web's shadows.
+            <span className="text-blue-400 font-bold">🔍 Cyber Vault</span> allows you to search and analyze internet-connected devices safely. 
+            Use our professional tools to discover devices and services exposed to the internet for security assessment.
           </span>
         </AlertDescription>
       </Alert>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="bg-black border border-orange-900/50 mx-auto mb-4">
-          <TabsTrigger value="search" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
-            <Search className="h-4 w-4 mr-2" />Search Incantation
+        <TabsList className="bg-slate-900 border border-blue-900/50 mx-auto mb-4">
+          <TabsTrigger value="search" className="data-[state=active]:bg-blue-900/30 data-[state=active]:text-blue-400">
+            <Search className="h-4 w-4 mr-2" />Search Interface
           </TabsTrigger>
-          <TabsTrigger value="spooky" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
-            <Skull className="h-4 w-4 mr-2" />Spectral Searches
+          <TabsTrigger value="professional" className="data-[state=active]:bg-blue-900/30 data-[state=active]:text-blue-400">
+            <Database className="h-4 w-4 mr-2" />Advanced Queries
           </TabsTrigger>
-          <TabsTrigger value="learn" className="data-[state=active]:bg-orange-900/30 data-[state=active]:text-orange-400">
-            <Ghost className="h-4 w-4 mr-2" />Paranormal Guide
+          <TabsTrigger value="learn" className="data-[state=active]:bg-blue-900/30 data-[state=active]:text-blue-400">
+            <Monitor className="h-4 w-4 mr-2" />Security Guide
           </TabsTrigger>
         </TabsList>
         
         <TabsContent value="search" className="space-y-4">
           {/* Main Search Interface */}
-          <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+          <Card className="border-blue-500/30 bg-gradient-to-r from-slate-950 to-blue-950">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-orange-400">
-                <Search className="h-5 w-5" />Digital Spirit Seeker
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <Search className="h-5 w-5" />Professional Device Search
               </CardTitle>
-              <CardDescription className="text-orange-300/70">
-                Search for devices, servers, and digital entities haunting the internet
+              <CardDescription className="text-blue-300/70">
+                Search for devices, servers, and network services connected to the internet
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Search Bar */}
               <div className="flex gap-2">
                 <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-orange-500/70" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-500/70" />
                   <Input
                     placeholder="Enter your search query (e.g., 'webcam', 'apache', 'port:22')..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 bg-black/50 border-orange-900/50 text-orange-100 placeholder:text-orange-300/50 focus-visible:ring-orange-500/30 focus-visible:border-orange-500/50"
+                    className="pl-10 bg-slate-900/50 border-blue-900/50 text-blue-100 placeholder:text-blue-300/50 focus-visible:ring-blue-500/30 focus-visible:border-blue-500/50"
                     onKeyPress={(e) => e.key === "Enter" && handleSearch()}
                   />
                 </div>
                 <Button 
                   onClick={handleSearch} 
-                  className="bg-orange-600 hover:bg-orange-700 animate-pulse shadow-[0_0_10px_rgba(255,102,0,0.5)]"
+                  className="bg-blue-600 hover:bg-blue-700 animate-pulse shadow-[0_0_10px_rgba(59,130,246,0.5)]"
                 >
-                  <Search className="h-4 w-4 mr-2" />Conjure
+                  <Search className="h-4 w-4 mr-2" />Search
                 </Button>
                 <Button 
                   variant="outline" 
                   onClick={() => setShowAdvanced(!showAdvanced)}
-                  className="border-orange-500/50 text-orange-400 hover:bg-orange-950"
+                  className="border-blue-500/50 text-blue-400 hover:bg-blue-950"
                 >
                   <Filter className="h-4 w-4 mr-2" />
                   Filters
@@ -231,14 +231,14 @@ export function CyberSearchInterface() {
 
               {/* Advanced Filters */}
               {showAdvanced && (
-                <div className="grid gap-4 md:grid-cols-3 p-4 border rounded-lg border-orange-900/50 bg-black/30">
+                <div className="grid gap-4 md:grid-cols-3 p-4 border rounded-lg border-blue-900/50 bg-slate-900/30">
                   <div className="space-y-2">
-                    <Label className="text-orange-300">🌍 Country</Label>
+                    <Label className="text-blue-300">🌍 Country</Label>
                     <Select value={selectedCountry} onValueChange={setSelectedCountry}>
-                      <SelectTrigger className="bg-black/50 border-orange-900/50 text-orange-100 focus-visible:ring-orange-500/30">
+                      <SelectTrigger className="bg-slate-900/50 border-blue-900/50 text-blue-100 focus-visible:ring-blue-500/30">
                         <SelectValue placeholder="Select country" />
                       </SelectTrigger>
-                      <SelectContent className="bg-black border-orange-900">
+                      <SelectContent className="bg-slate-900 border-blue-900">
                         {countries.map((country) => (
                           <SelectItem key={country} value={country.toLowerCase()}>
                             {country}
@@ -248,12 +248,12 @@ export function CyberSearchInterface() {
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-orange-300">🖥️ Device Type</Label>
+                    <Label className="text-blue-300">🖥️ Device Type</Label>
                     <Select value={selectedDeviceType} onValueChange={setSelectedDeviceType}>
-                      <SelectTrigger className="bg-black/50 border-orange-900/50 text-orange-100 focus-visible:ring-orange-500/30">
+                      <SelectTrigger className="bg-slate-900/50 border-blue-900/50 text-blue-100 focus-visible:ring-blue-500/30">
                         <SelectValue placeholder="Select device type" />
                       </SelectTrigger>
-                      <SelectContent className="bg-black border-orange-900">
+                      <SelectContent className="bg-slate-900 border-blue-900">
                         {deviceTypes.map((type) => (
                           <SelectItem key={type} value={type.toLowerCase()}>
                             {type}
@@ -263,10 +263,10 @@ export function CyberSearchInterface() {
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-orange-300">🔌 Port Range</Label>
+                    <Label className="text-blue-300">🔌 Port Range</Label>
                     <Input 
                       placeholder="e.g., 80,443,8080-8090" 
-                      className="bg-black/50 border-orange-900/50 text-orange-100 placeholder:text-orange-300/50 focus-visible:ring-orange-500/30 focus-visible:border-orange-500/50"
+                      className="bg-slate-900/50 border-blue-900/50 text-blue-100 placeholder:text-blue-300/50 focus-visible:ring-blue-500/30 focus-visible:border-blue-500/50"
                     />
                   </div>
                 </div>
@@ -276,36 +276,36 @@ export function CyberSearchInterface() {
 
           {/* Common Searches */}
           <div className="grid gap-6 md:grid-cols-2">
-            <Card className="border-orange-500/30 bg-gradient-to-r from-black/80 to-orange-950/30">
+            <Card className="border-blue-500/30 bg-gradient-to-r from-slate-900/80 to-blue-950/30">
               <CardHeader>
-                <CardTitle className="text-lg text-orange-400 flex items-center gap-2">
-                  🔍 Common Haunted Searches
+                <CardTitle className="text-lg text-blue-400 flex items-center gap-2">
+                  🔍 Common Security Searches
                 </CardTitle>
-                <CardDescription className="text-orange-300/70">
-                  Discover digital entities lurking in the internet's shadows
+                <CardDescription className="text-blue-300/70">
+                  Discover network devices and services exposed to the internet
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {hauntedSearchSuggestions.map((suggestion, index) => (
+                  {securitySearchSuggestions.map((suggestion, index) => (
                     <div
                       key={index}
-                      className="flex items-center justify-between p-3 border border-orange-900/30 rounded-lg hover:bg-orange-950/30 cursor-pointer transition-colors group"
+                      className="flex items-center justify-between p-3 border border-blue-900/30 rounded-lg hover:bg-blue-950/30 cursor-pointer transition-colors group"
                       onClick={() => handleSuggestionClick(suggestion.query, suggestion.externalLink)}
                     >
                       <div className="flex items-center gap-3">
-                        <suggestion.icon className="h-4 w-4 text-orange-500" />
+                        <suggestion.icon className="h-4 w-4 text-blue-500" />
                         <div>
-                          <p className="font-medium text-sm text-orange-200">{suggestion.query}</p>
-                          <p className="text-xs text-orange-300/70">{suggestion.description}</p>
-                          <p className="text-xs text-orange-500 mt-1">💀 {suggestion.explanation}</p>
+                          <p className="font-medium text-sm text-blue-200">{suggestion.query}</p>
+                          <p className="text-xs text-blue-300/70">{suggestion.description}</p>
+                          <p className="text-xs text-blue-500 mt-1">⚠️ {suggestion.explanation}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30">
+                        <Badge variant="outline" className="border-blue-500/50 text-blue-400 bg-slate-900/30">
                           {suggestion.count}
                         </Badge>
-                        <ExternalLink className="h-3 w-3 text-orange-400/50 group-hover:text-orange-400 transition-colors" />
+                        <ExternalLink className="h-3 w-3 text-blue-400/50 group-hover:text-blue-400 transition-colors" />
                       </div>
                     </div>
                   ))}
@@ -313,113 +313,113 @@ export function CyberSearchInterface() {
               </CardContent>
             </Card>
 
-            <Card className="border-orange-500/30 bg-gradient-to-r from-black/80 to-orange-950/30">
+            <Card className="border-blue-500/30 bg-gradient-to-r from-slate-900/80 to-blue-950/30">
               <CardHeader>
-                <CardTitle className="text-lg text-orange-400 flex items-center gap-2">
-                  🧪 Latest Detection Potions
+                <CardTitle className="text-lg text-blue-400 flex items-center gap-2">
+                  🔍 Latest Security Intelligence
                 </CardTitle>
-                <CardDescription className="text-orange-300/70">
-                  Fresh intel on digital vulnerabilities and sightings
+                <CardDescription className="text-blue-300/70">
+                  Current threat intelligence and vulnerability alerts
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-center p-3 border border-orange-500/20 rounded-lg bg-black/30 animate-pulse">
-                  <div className="mr-3 text-xl">🎃</div>
+                <div className="flex items-center p-3 border border-blue-500/20 rounded-lg bg-slate-900/30 animate-pulse">
+                  <div className="mr-3 text-xl">🛡️</div>
                   <div className="flex-1">
-                    <h4 className="text-sm font-medium text-orange-400">Halloween Security Special</h4>
-                    <p className="text-xs text-orange-300/70">
-                      New vulnerability detected in IoT doorbell cameras that could allow unwanted spectral visitors
+                    <h4 className="text-sm font-medium text-blue-400">Enterprise Security Update</h4>
+                    <p className="text-xs text-blue-300/70">
+                      New vulnerability detected in IoT doorbell cameras requires immediate patching
                     </p>
                   </div>
-                  <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30">New</Badge>
+                  <Badge variant="outline" className="border-blue-500/50 text-blue-400 bg-slate-900/30">New</Badge>
                 </div>
                 
-                <div className="flex items-center p-3 border border-orange-900/30 rounded-lg">
-                  <div className="mr-3 text-xl">🦇</div>
+                <div className="flex items-center p-3 border border-blue-900/30 rounded-lg">
+                  <div className="mr-3 text-xl">⚠️</div>
                   <div className="flex-1">
-                    <h4 className="text-sm font-medium text-orange-200">Router Vulnerability Discovered</h4>
-                    <p className="text-xs text-orange-300/70">
+                    <h4 className="text-sm font-medium text-blue-200">Router Vulnerability Discovered</h4>
+                    <p className="text-xs text-blue-300/70">
                       Popular router models affected by security flaw allowing remote access
                     </p>
                   </div>
-                  <Badge variant="outline" className="border-red-500/50 text-red-400 bg-black/30">Critical</Badge>
+                  <Badge variant="outline" className="border-red-500/50 text-red-400 bg-slate-900/30">Critical</Badge>
                 </div>
                 
-                <div className="flex items-center p-3 border border-orange-900/30 rounded-lg">
-                  <div className="mr-3 text-xl">🕸️</div>
+                <div className="flex items-center p-3 border border-blue-900/30 rounded-lg">
+                  <div className="mr-3 text-xl">🔧</div>
                   <div className="flex-1">
-                    <h4 className="text-sm font-medium text-orange-200">Web Server Backdoor</h4>
-                    <p className="text-xs text-orange-300/70">
+                    <h4 className="text-sm font-medium text-blue-200">Web Server Backdoor</h4>
+                    <p className="text-xs text-blue-300/70">
                       Apache servers running version 2.4.49 may have unauthorized access points
                     </p>
                   </div>
-                  <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-black/30">High</Badge>
+                  <Badge variant="outline" className="border-blue-500/50 text-blue-400 bg-slate-900/30">High</Badge>
                 </div>
               </CardContent>
             </Card>
           </div>
         </TabsContent>
         
-        <TabsContent value="spooky" className="space-y-4">
-          <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+        <TabsContent value="professional" className="space-y-4">
+          <Card className="border-blue-500/30 bg-gradient-to-r from-slate-950 to-blue-950">
             <CardHeader>
-              <CardTitle className="text-lg text-orange-400 flex items-center gap-2">
-                <Skull className="h-5 w-5" /> Spectral Search Formulas
+              <CardTitle className="text-lg text-blue-400 flex items-center gap-2">
+                <Database className="h-5 w-5" /> Advanced Query Patterns
               </CardTitle>
-              <CardDescription className="text-orange-300/70">
-                Advanced search incantations for finding specific types of haunted devices
+              <CardDescription className="text-blue-300/70">
+                Professional search patterns for finding specific types of network devices and services
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {spookySearchDorks.map((dork, index) => (
+                {professionalSearchDorks.map((dork, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between p-3 border border-orange-900/30 rounded-lg hover:bg-orange-950/30 cursor-pointer transition-colors group"
+                    className="flex items-center justify-between p-3 border border-blue-900/30 rounded-lg hover:bg-blue-950/30 cursor-pointer transition-colors group"
                     onClick={() => handleSuggestionClick(dork.query, dork.externalLink)}
                   >
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <p className="font-medium text-sm text-orange-200">{dork.name}</p>
+                        <p className="font-medium text-sm text-blue-200">{dork.name}</p>
                         <Badge variant="outline" className={`
-                          border-orange-500/50 bg-black/30
+                          border-blue-500/50 bg-slate-900/30
                           ${dork.risk === 'Critical' ? 'text-red-400 border-red-500/50' : 
-                            dork.risk === 'High' ? 'text-orange-400 border-orange-500/50' : 
+                            dork.risk === 'High' ? 'text-blue-400 border-blue-500/50' : 
                             dork.risk === 'Medium' ? 'text-yellow-400 border-yellow-500/50' : 
                             'text-green-400 border-green-500/50'}
                         `}>
                           {dork.risk} Risk
                         </Badge>
                       </div>
-                      <code className="text-xs bg-black/50 px-2 py-1 rounded text-orange-300">{dork.query}</code>
-                      <p className="text-xs text-orange-500 mt-1">🔮 {dork.explanation}</p>
+                      <code className="text-xs bg-slate-900/50 px-2 py-1 rounded text-blue-300">{dork.query}</code>
+                      <p className="text-xs text-blue-500 mt-1">🔍 {dork.explanation}</p>
                     </div>
-                    <ExternalLink className="h-3 w-3 text-orange-400/50 group-hover:text-orange-400 transition-colors ml-2" />
+                    <ExternalLink className="h-3 w-3 text-blue-400/50 group-hover:text-blue-400 transition-colors ml-2" />
                   </div>
                 ))}
               </div>
             </CardContent>
           </Card>
           
-          <Card className="border-orange-500/30 bg-gradient-to-r from-black/80 to-orange-950/30">
+          <Card className="border-blue-500/30 bg-gradient-to-r from-slate-900/80 to-blue-950/30">
             <CardHeader>
-              <CardTitle className="text-orange-400">⚠️ Warning: Digital Séance Safety</CardTitle>
-              <CardDescription className="text-orange-300/70">
-                Summoning digital entities requires caution and ethical practice
+              <CardTitle className="text-blue-400">⚠️ Warning: Professional Security Standards</CardTitle>
+              <CardDescription className="text-blue-300/70">
+                Network security assessment requires careful attention to ethical practices
               </CardDescription>
             </CardHeader>
             <CardContent className="prose prose-invert max-w-none">
-              <div className="p-4 border border-red-900/50 rounded-lg bg-black/30">
-                <h4 className="text-red-400 text-lg mt-0">The Digital Witch's Code</h4>
-                <ul className="text-sm text-orange-200/90 space-y-2">
+              <div className="p-4 border border-red-900/50 rounded-lg bg-slate-900/30">
+                <h4 className="text-red-400 text-lg mt-0">Security Professional Code of Ethics</h4>
+                <ul className="text-sm text-blue-200/90 space-y-2">
                   <li>Only observe publicly accessible devices - never attempt to breach or access protected systems</li>
                   <li>Respect privacy - do not access personal cameras or private information</li>
                   <li>Report vulnerabilities to system owners or appropriate security channels</li>
                   <li>Never use this knowledge for malicious purposes</li>
                   <li>Remember that even public systems may contain sensitive information</li>
                 </ul>
-                <div className="mt-4 text-sm text-orange-300/70">
-                  Remember: With great power comes great responsibility. Use Salem Cyber Vault for education and legitimate security research only.
+                <div className="mt-4 text-sm text-blue-300/70">
+                  Remember: With great power comes great responsibility. Use Cyber Vault for education and legitimate security research only.
                 </div>
               </div>
             </CardContent>
@@ -427,98 +427,98 @@ export function CyberSearchInterface() {
         </TabsContent>
         
         <TabsContent value="learn" className="space-y-4">
-          <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950">
+          <Card className="border-blue-500/30 bg-gradient-to-r from-slate-950 to-blue-950">
             <CardHeader>
-              <CardTitle className="text-orange-400">🎓 The Paranormal Investigator's Guide</CardTitle>
-              <CardDescription className="text-orange-300/70">
-                Understanding the mysteries of cyber search for beginners
+              <CardTitle className="text-blue-400">🎓 Professional Security Guide</CardTitle>
+              <CardDescription className="text-blue-300/70">
+                Understanding network security assessment fundamentals for professionals
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="grid gap-4 md:grid-cols-2">
-                  <Card className="bg-black/50 border-orange-900/50">
+                  <Card className="bg-slate-900/50 border-blue-900/50">
                     <CardHeader className="py-4">
-                      <CardTitle className="text-lg text-orange-400">🔍 What is Cyber Search?</CardTitle>
+                      <CardTitle className="text-lg text-blue-400">🔍 What is Network Security Assessment?</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-orange-200/80">
-                        Cyber search is like using a special looking glass to find devices connected to the internet. Unlike regular search engines that find websites, cyber search tools find actual devices - from security cameras and routers to servers and industrial systems.
+                      <p className="text-sm text-blue-200/80">
+                        Network security assessment involves identifying internet-connected devices and services to evaluate security posture. Professional tools help security researchers find systems that may be exposed to potential threats, enabling proactive security measures.
                       </p>
-                      <div className="mt-4 p-3 bg-orange-950/20 rounded-lg border border-orange-900/30">
-                        <p className="text-xs text-orange-300">
-                          <span className="font-bold">Everyday example:</span> It's like having a magical map that shows you all the doorways that are visible from the street in your town - you can see they exist, but you're just observing, not entering.
+                      <div className="mt-4 p-3 bg-blue-950/20 rounded-lg border border-blue-900/30">
+                        <p className="text-xs text-blue-300">
+                          <span className="font-bold">Professional context:</span> It's like conducting a security audit of publicly visible network infrastructure - identifying what services are exposed and assessing potential security implications.
                         </p>
                       </div>
                     </CardContent>
                   </Card>
                   
-                  <Card className="bg-black/50 border-orange-900/50">
+                  <Card className="bg-slate-900/50 border-blue-900/50">
                     <CardHeader className="py-4">
-                      <CardTitle className="text-lg text-orange-400">🎭 Common Search Terms</CardTitle>
+                      <CardTitle className="text-lg text-blue-400">🎯 Common Search Parameters</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
                       <div>
-                        <Badge variant="outline" className="border-orange-500/50 text-orange-400 mb-1">port:80</Badge>
-                        <p className="text-xs text-orange-200/80">Finds web servers (most websites use port 80)</p>
+                        <Badge variant="outline" className="border-blue-500/50 text-blue-400 mb-1">port:80</Badge>
+                        <p className="text-xs text-blue-200/80">Finds web servers (most websites use port 80)</p>
                       </div>
                       <div>
-                        <Badge variant="outline" className="border-orange-500/50 text-orange-400 mb-1">country:US</Badge>
-                        <p className="text-xs text-orange-200/80">Finds devices in the United States</p>
+                        <Badge variant="outline" className="border-blue-500/50 text-blue-400 mb-1">country:US</Badge>
+                        <p className="text-xs text-blue-200/80">Finds devices in the United States</p>
                       </div>
                       <div>
-                        <Badge variant="outline" className="border-orange-500/50 text-orange-400 mb-1">webcam</Badge>
-                        <p className="text-xs text-orange-200/80">Finds cameras connected to the internet</p>
+                        <Badge variant="outline" className="border-blue-500/50 text-blue-400 mb-1">webcam</Badge>
+                        <p className="text-xs text-blue-200/80">Finds cameras connected to the internet</p>
                       </div>
                       <div>
-                        <Badge variant="outline" className="border-orange-500/50 text-orange-400 mb-1">org:"Company Name"</Badge>
-                        <p className="text-xs text-orange-200/80">Finds devices belonging to an organization</p>
+                        <Badge variant="outline" className="border-blue-500/50 text-blue-400 mb-1">org:"Company Name"</Badge>
+                        <p className="text-xs text-blue-200/80">Finds devices belonging to an organization</p>
                       </div>
                     </CardContent>
                   </Card>
                 </div>
                 
                 <div className="grid gap-4 md:grid-cols-2">
-                  <Card className="bg-black/50 border-orange-900/50">
+                  <Card className="bg-slate-900/50 border-blue-900/50">
                     <CardHeader className="py-4">
-                      <CardTitle className="text-lg text-orange-400">🛡️ Is This Legal?</CardTitle>
+                      <CardTitle className="text-lg text-blue-400">🛡️ Is This Legal?</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-orange-200/80">
-                        Yes! Cyber search is completely legal when used properly. You're only viewing publicly available information about devices that are already exposed to the internet. Think of it like walking down a public street and observing the houses - you can see they're there, but you're not going inside.
+                      <p className="text-sm text-blue-200/80">
+                        Yes! Professional network security assessment is completely legal when conducted ethically. You're only viewing publicly available information about systems exposed to the internet. This is standard practice in cybersecurity for identifying potential vulnerabilities.
                       </p>
                       <div className="mt-4 p-3 bg-red-950/20 rounded-lg border border-red-900/30">
                         <p className="text-xs text-red-300 font-bold">Important:</p>
-                        <p className="text-xs text-orange-300 mt-1">
+                        <p className="text-xs text-blue-300 mt-1">
                           Never attempt to access, log into, or breach any systems you discover. Only observe what's publicly visible. Unauthorized access is illegal and unethical.
                         </p>
                       </div>
                     </CardContent>
                   </Card>
                   
-                  <Card className="bg-black/50 border-orange-900/50">
+                  <Card className="bg-slate-900/50 border-blue-900/50">
                     <CardHeader className="py-4">
-                      <CardTitle className="text-lg text-orange-400">👁️ What Can You See?</CardTitle>
+                      <CardTitle className="text-lg text-blue-400">👁️ What Can You Discover?</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      <p className="text-sm text-orange-200/80">
-                        When searching, you might discover:
+                      <p className="text-sm text-blue-200/80">
+                        During security assessment, you might discover:
                       </p>
-                      <ul className="space-y-2 text-xs text-orange-200/80">
+                      <ul className="space-y-2 text-xs text-blue-200/80">
                         <li className="flex items-start gap-2">
-                          <Server className="h-4 w-4 text-orange-500 mt-0.5" />
+                          <Server className="h-4 w-4 text-blue-500 mt-0.5" />
                           <span>Web servers that host websites</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <Monitor className="h-4 w-4 text-orange-500 mt-0.5" />
+                          <Monitor className="h-4 w-4 text-blue-500 mt-0.5" />
                           <span>Security cameras with public interfaces</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <Database className="h-4 w-4 text-orange-500 mt-0.5" />
+                          <Database className="h-4 w-4 text-blue-500 mt-0.5" />
                           <span>Database systems (though accessing data requires authorization)</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <Globe className="h-4 w-4 text-orange-500 mt-0.5" />
+                          <Globe className="h-4 w-4 text-blue-500 mt-0.5" />
                           <span>Routers, printers, smart devices, and industrial control systems</span>
                         </li>
                       </ul>
@@ -529,46 +529,46 @@ export function CyberSearchInterface() {
             </CardContent>
           </Card>
           
-          {/* Halloween-themed educational card */}
-          <Card className="border-orange-500/30 bg-gradient-to-r from-black to-orange-950/70">
+          {/* Professional security education card */}
+          <Card className="border-blue-500/30 bg-gradient-to-r from-slate-950 to-blue-950/70">
             <CardHeader>
-              <CardTitle className="text-orange-400 flex items-center gap-2">
-                <div className="text-2xl">🎃</div> Halloween Security Special
+              <CardTitle className="text-blue-400 flex items-center gap-2">
+                <div className="text-2xl">🛡️</div> Professional Security Insights
               </CardTitle>
-              <CardDescription className="text-orange-300/70">
-                Seasonal cyber threats to watch for during the spooky season
+              <CardDescription className="text-blue-300/70">
+                Critical security considerations for professional network monitoring
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="p-4 border border-orange-900/50 rounded-lg bg-black/30">
-                <h4 className="text-orange-400 text-lg mb-2">Common Halloween Cyber Threats</h4>
-                <ul className="space-y-3 text-sm text-orange-200/90">
+              <div className="p-4 border border-blue-900/50 rounded-lg bg-slate-900/30">
+                <h4 className="text-blue-400 text-lg mb-2">Common Network Security Threats</h4>
+                <ul className="space-y-3 text-sm text-blue-200/90">
                   <li className="flex items-start gap-2">
-                    <div className="text-xl mt-0">🎭</div>
+                    <div className="text-xl mt-0">📧</div>
                     <div>
-                      <p className="font-medium">Costume Phishing Emails</p>
-                      <p className="text-xs text-orange-300/70">Scammers sending fake Halloween costume sale emails with malicious links</p>
+                      <p className="font-medium">Phishing Campaigns</p>
+                      <p className="text-xs text-blue-300/70">Sophisticated email attacks targeting corporate credentials and sensitive data</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-2">
-                    <div className="text-xl mt-0">🍬</div>
+                    <div className="text-xl mt-0">🦠</div>
                     <div>
-                      <p className="font-medium">Trick-or-Treat Malware</p>
-                      <p className="text-xs text-orange-300/70">Malware disguised as Halloween-themed apps, screensavers, and games</p>
+                      <p className="font-medium">Advanced Malware</p>
+                      <p className="text-xs text-blue-300/70">Sophisticated malicious software designed to evade traditional security measures</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-2">
-                    <div className="text-xl mt-0">👻</div>
+                    <div className="text-xl mt-0">👤</div>
                     <div>
-                      <p className="font-medium">Ghost Accounts</p>
-                      <p className="text-xs text-orange-300/70">Abandoned accounts with admin access that hackers can exploit</p>
+                      <p className="font-medium">Orphaned Accounts</p>
+                      <p className="text-xs text-blue-300/70">Abandoned user accounts with elevated privileges that pose security risks</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-2">
-                    <div className="text-xl mt-0">🦇</div>
+                    <div className="text-xl mt-0">📊</div>
                     <div>
-                      <p className="font-medium">Vampire Data Draining</p>
-                      <p className="text-xs text-orange-300/70">Data exfiltration attacks that slowly drain information over time</p>
+                      <p className="font-medium">Data Exfiltration</p>
+                      <p className="text-xs text-blue-300/70">Unauthorized data extraction attacks that operate slowly to avoid detection</p>
                     </div>
                   </li>
                 </ul>
@@ -576,10 +576,10 @@ export function CyberSearchInterface() {
               
               <Button
                 variant="outline"
-                className="w-full border-orange-500/50 text-orange-400 hover:bg-orange-950/30"
+                className="w-full border-blue-500/50 text-blue-400 hover:bg-blue-950/30"
               >
-                <Ghost className="h-4 w-4 mr-2" />
-                View Complete Halloween Security Guide
+                <Monitor className="h-4 w-4 mr-2" />
+                View Complete Security Guide
               </Button>
             </CardContent>
           </Card>
