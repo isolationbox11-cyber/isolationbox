@@ -1,31 +1,25 @@
+import type React from "react"
 import type { Metadata } from "next"
+import { Inter } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { FloatingEyes } from "@/components/floating-eyes"
+
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Salem Cyber Vault - Cybersecurity Dashboard",
-  description: "Halloween-themed cybersecurity monitoring dashboard",
+  title: "Cyber Watch Vault - Internet Intelligence Platform",
+  description:
+    "Advanced cybersecurity intelligence platform for discovering and analyzing internet-connected devices and services.",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="halloween-bg-texture">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          themes={["light", "dark", "halloween"]}
-        >
-          {children}
-          <FloatingEyes />
-        </ThemeProvider>
-      </body>
+    <html lang="en" className="dark">
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }
