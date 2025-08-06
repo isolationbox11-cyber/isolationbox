@@ -82,10 +82,10 @@ export function FloatingEyes() {
         >
           <div className="relative w-full h-full">
             {/* Outer glow */}
-            <div className="absolute inset-0 bg-blue-400 rounded-full blur-md animate-pulse opacity-30"></div>
+            <div className="absolute inset-0 bg-purple-400 rounded-full blur-md animate-pulse opacity-30"></div>
 
             {/* Eye container */}
-            <div className="absolute inset-1 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center shadow-lg">
+            <div className="absolute inset-1 bg-gradient-to-br from-purple-400 to-violet-500 rounded-full flex items-center justify-center shadow-lg">
               {/* Pupil */}
               <div
                 className={`bg-slate-900 rounded-full transition-all duration-150 ${
@@ -99,7 +99,7 @@ export function FloatingEyes() {
 
             {/* Twinkling effect */}
             <div
-              className="absolute inset-0 bg-white rounded-full opacity-20 animate-ping"
+              className="absolute inset-0 bg-purple-300 rounded-full opacity-20 animate-ping"
               style={{ animationDelay: `${eye.id * 0.5}s`, animationDuration: "3s" }}
             ></div>
           </div>

@@ -1,4 +1,88 @@
-# Salem Cyber Vault
+# Cyber Intelligence Vault
+
+A unified cybersecurity intelligence platform that integrates multiple threat intelligence APIs with a modern purple-themed interface and floating eyes animation.
+
+## Features
+
+- 🛡️ **Unified Dashboard** - Real-time threat intelligence from 5 major APIs
+- 🔍 **Multi-API Integration** - Shodan, VirusTotal, GreyNoise, AbuseIPDB, Alienvault OTX
+- 🎨 **Purple Theme** - Modern dark theme with purple accents and floating eyes animation
+- ⚡ **Live Threat Feed** - Real-time threat detection and monitoring
+- 📊 **API Status Monitoring** - Track API health and response times
+- 🌐 **Global Threat Intelligence** - Comprehensive security data aggregation
+- 📱 **Responsive Design** - Works perfectly on desktop and mobile
+- 🚀 **Vercel Ready** - Optimized for seamless deployment
+
+## API Integrations
+
+- **Shodan** - Internet-connected device scanning
+- **VirusTotal** - File and URL analysis
+- **GreyNoise** - Internet noise intelligence
+- **AbuseIPDB** - IP reputation and abuse reporting
+- **Alienvault OTX** - Open threat exchange
+
+## Environment Variables
+
+Create a `.env.local` file for live API data:
+
+```bash
+NEXT_PUBLIC_SHODAN_API_KEY=your_shodan_key_here
+NEXT_PUBLIC_VIRUSTOTAL_API_KEY=your_virustotal_key_here
+NEXT_PUBLIC_GREYNOISE_KEY=your_greynoise_key_here
+NEXT_PUBLIC_ABUSEIPDB_KEY=your_abuseipdb_key_here
+NEXT_PUBLIC_ALIENVAULT_OTX_KEY=your_otx_key_here
+```
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+## Deployment
+
+This project is optimized for Vercel deployment:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/isolationbox11-cyber/isolationbox)
+
+### Vercel Setup
+
+1. Connect your GitHub repository to Vercel
+2. Add environment variables in the Vercel dashboard
+3. Deploy automatically on every push
+
+## Tech Stack
+
+- **Framework**: Next.js 15
+- **UI Library**: React 19  
+- **Styling**: Tailwind CSS
+- **Components**: Radix UI
+- **Icons**: Lucide React
+- **Language**: TypeScript
+- **Charts**: Recharts
+
+## Dashboard Sections
+
+- **Dashboard** - Overview with live stats and threat feed
+- **Threat Intelligence** - Detailed threat analysis
+- **Monitoring** - Real-time security monitoring
+- **Threat Map** - Global threat visualization
+- **Alerts** - Security alerts and notifications
+- **Search** - Multi-API search interface
+- **Data Sources** - API status and health monitoring
+- **Settings** - Configuration and preferences
+
+Perfect for cybersecurity professionals who need unified threat intelligence in a modern, intuitive interface!
 
 A Halloween-themed cybersecurity monitoring dashboard built with Next.js, React, and Tailwind CSS.
 
