@@ -381,6 +381,37 @@ export async function getComprehensiveThreatIntel(ip: string) {
 
 // Enhanced threat map data using real Shodan data
 export async function getThreatMapData(): Promise<ThreatMapData[]> {
+  // Check if we're in a development environment with limited network access
+  const isDev = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+  
+  // Country coordinates mapping
+  const countryData: Record<string, { name: string; coordinates: [number, number] }> = {
+    US: { name: "United States", coordinates: [39.8283, -98.5795] },
+    CN: { name: "China", coordinates: [35.8617, 104.1954] },
+    RU: { name: "Russia", coordinates: [61.524, 105.3188] },
+    DE: { name: "Germany", coordinates: [51.1657, 10.4515] },
+    GB: { name: "United Kingdom", coordinates: [55.3781, -3.436] },
+    FR: { name: "France", coordinates: [46.2276, 2.2137] },
+    JP: { name: "Japan", coordinates: [36.2048, 138.2529] },
+    KR: { name: "South Korea", coordinates: [35.9078, 127.7669] },
+    IN: { name: "India", coordinates: [20.5937, 78.9629] },
+    BR: { name: "Brazil", coordinates: [-14.235, -51.9253] },
+  }
+
+  // In development/demo mode, use fallback data immediately
+  if (isDev) {
+    console.log("Using fallback threat map data for demo")
+    return Object.entries(countryData).map(([code, info]) => ({
+      country: info.name,
+      countryCode: code,
+      threats: Math.floor(Math.random() * 5000) + 500,
+      botnets: Math.floor(Math.random() * 50) + 10,
+      malwareTypes: ["Mirai", "Emotet", "TrickBot", "Qbot", "Gafgyt"].slice(0, Math.floor(Math.random() * 3) + 1),
+      coordinates: info.coordinates,
+      riskLevel: Math.random() > 0.6 ? "high" : Math.random() > 0.3 ? "medium" : "low"
+    }))
+  }
+
   try {
     // Search for various threat indicators across different countries
     const queries = [
@@ -395,20 +426,6 @@ export async function getThreatMapData(): Promise<ThreatMapData[]> {
       "country:IN worm",
       "country:BR spyware",
     ]
-
-    // Country coordinates mapping
-    const countryData: Record<string, { name: string; coordinates: [number, number] }> = {
-      US: { name: "United States", coordinates: [39.8283, -98.5795] },
-      CN: { name: "China", coordinates: [35.8617, 104.1954] },
-      RU: { name: "Russia", coordinates: [61.524, 105.3188] },
-      DE: { name: "Germany", coordinates: [51.1657, 10.4515] },
-      GB: { name: "United Kingdom", coordinates: [55.3781, -3.436] },
-      FR: { name: "France", coordinates: [46.2276, 2.2137] },
-      JP: { name: "Japan", coordinates: [36.2048, 138.2529] },
-      KR: { name: "South Korea", coordinates: [35.9078, 127.7669] },
-      IN: { name: "India", coordinates: [20.5937, 78.9629] },
-      BR: { name: "Brazil", coordinates: [-14.235, -51.9253] },
-    }
 
     try {
       const searchPromises = queries.map(async (query) => {
@@ -509,6 +526,69 @@ export async function getCurrentBotnets(): Promise<BotnetData[]> {
 
 // Enhanced live threat feed using multiple sources
 export async function getLiveThreatFeed(): Promise<LiveThreatEvent[]> {
+  // Check if we're in a development environment with limited network access
+  const isDev = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+  
+  // In development/demo mode, use fallback data immediately
+  if (isDev) {
+    console.log("Using fallback threat feed data for demo")
+    const now = new Date()
+    const fallbackEvents: LiveThreatEvent[] = [
+      {
+        id: "malware-192.168.1.100-demo",
+        timestamp: new Date(now.getTime() - 5 * 60 * 1000), // 5 minutes ago
+        type: "malware",
+        source: "192.168.1.100",
+        target: "Multiple",
+        severity: "high",
+        description: "Malware activity detected on Apache HTTP Server",
+        location: { country: "United States", city: "New York", coordinates: [40.7128, -74.0060] }
+      },
+      {
+        id: "exploit-10.0.0.1-demo",
+        timestamp: new Date(now.getTime() - 12 * 60 * 1000), // 12 minutes ago
+        type: "exploit",
+        source: "10.0.0.1",
+        target: "Web Server",
+        severity: "critical",
+        description: "SQL injection attempt detected",
+        location: { country: "Germany", city: "Berlin", coordinates: [52.5200, 13.4050] }
+      },
+      {
+        id: "botnet-172.16.0.5-demo",
+        timestamp: new Date(now.getTime() - 25 * 60 * 1000), // 25 minutes ago
+        type: "botnet",
+        source: "172.16.0.5",
+        target: "IoT Device",
+        severity: "medium",
+        description: "Botnet command and control traffic detected",
+        location: { country: "China", city: "Shanghai", coordinates: [31.2304, 121.4737] }
+      },
+      {
+        id: "phishing-203.0.113.10-demo",
+        timestamp: new Date(now.getTime() - 45 * 60 * 1000), // 45 minutes ago
+        type: "phishing",
+        source: "203.0.113.10",
+        target: "Email Server",
+        severity: "medium",
+        description: "Phishing campaign targeting financial institutions",
+        location: { country: "Russia", city: "Moscow", coordinates: [55.7558, 37.6176] }
+      },
+      {
+        id: "ransomware-198.51.100.25-demo",
+        timestamp: new Date(now.getTime() - 2 * 60 * 60 * 1000), // 2 hours ago
+        type: "ransomware",
+        source: "198.51.100.25",
+        target: "File Server",
+        severity: "critical",
+        description: "Ransomware encryption activity detected",
+        location: { country: "United Kingdom", city: "London", coordinates: [51.5074, -0.1278] }
+      }
+    ]
+
+    return fallbackEvents
+  }
+
   try {
     const threatQueries = [
       "malware",
