@@ -1,13 +1,17 @@
+// Legacy API keys file - migrated to use environment variables
+// This file is kept for backward compatibility
+// New code should use /lib/api-config.ts instead
+
 export const API_KEYS = {
-  greynoise: "mBH7pYAY7cpYuGEMwkD1PXWcoqxkjQsuMa8ESZH8KwWfoohsIMzmXMX3L23b0Kdm",
-  shodan: "lmkycaLjbVoQTlA81pCtW6TdfYwa4wjv",
-  alienvault_otx: "e35df69a6f2f18c1b5acd6202632a58cfe90ff2ae4475a20855bcbf6d8f9b884",
+  greynoise: process.env.NEXT_PUBLIC_GREYNOISE_API_KEY || "",
+  shodan: process.env.NEXT_PUBLIC_SHODAN_API_KEY || "",
+  alienvault_otx: process.env.NEXT_PUBLIC_ALIENVAULT_OTX_API_KEY || "",
   abuseipdb: [
-    "deabac5bd7e9de2be72767151e6456fdc662960d90266ca15f17bc5c7c08bd068b9f607986b0af22",
-    "47c9836ea7af51fb6ef7e1e406313beb5bdaeaff909ad789"
-  ],
-  virustotal: "de0e621441bce18144a9a2eebd246ecce00c0eda7fcaf3c9612be0598365f2b0",
-  censys: "", // Add your Censys API key here
-  securitytrails: "", // Add your SecurityTrails API key here
-  haveibeenpwned: "" // Add your HaveIBeenPwned API key here
+    process.env.NEXT_PUBLIC_ABUSEIPDB_API_KEY || "",
+    process.env.NEXT_PUBLIC_ABUSEIPDB_API_KEY_2 || ""
+  ].filter(Boolean),
+  virustotal: process.env.NEXT_PUBLIC_VIRUSTOTAL_API_KEY || "",
+  censys: process.env.NEXT_PUBLIC_CENSYS_API_KEY || "",
+  securitytrails: process.env.NEXT_PUBLIC_SECURITYTRAILS_API_KEY || "",
+  haveibeenpwned: process.env.NEXT_PUBLIC_HIBP_API_KEY || ""
 };
