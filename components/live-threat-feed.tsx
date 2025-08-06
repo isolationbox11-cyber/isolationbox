@@ -3,180 +3,145 @@
 import { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Activity, AlertTriangle, Shield, Globe, Clock, MapPin, Zap, Eye } from "lucide-react"
-import { getLiveThreatFeed, type LiveThreatEvent } from "@/lib/api-client"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { AlertTriangle, Bot, Shield, Eye, Zap } from "lucide-react"
+import { getLiveThreatFeed } from "@/lib/unified-api"
+import type { LiveFeedItem } from "@/lib/unified-api"
 
 export function LiveThreatFeed() {
-  const [threats, setThreats] = useState<LiveThreatEvent[]>([])
+  const [threats, setThreats] = useState<LiveFeedItem[]>([])
   const [loading, setLoading] = useState(true)
-  const [filter, setFilter] = useState<string>("all")
 
   useEffect(() => {
-    const loadThreatFeed = async () => {
+    async function loadThreats() {
       try {
         const data = await getLiveThreatFeed()
         setThreats(data)
       } catch (error) {
-        console.error("Failed to load threat feed:", error)
+        console.error('Failed to load threat feed:', error)
       } finally {
         setLoading(false)
       }
     }
 
-    loadThreatFeed()
-    const interval = setInterval(loadThreatFeed, 60000) // Update every minute
+    loadThreats()
+    
+    // Refresh every 15 seconds
+    const interval = setInterval(loadThreats, 15000)
     return () => clearInterval(interval)
   }, [])
 
-  const getSeverityColor = (severity: string) => {
-    switch (severity) {
-      case "critical":
-        return "text-red-400 border-red-400 bg-red-500/10"
-      case "high":
-        return "text-orange-400 border-orange-400 bg-orange-500/10"
-      case "medium":
-        return "text-yellow-400 border-yellow-400 bg-yellow-500/10"
-      case "low":
-        return "text-green-400 border-green-400 bg-green-500/10"
-      default:
-        return "text-slate-400 border-slate-400 bg-slate-500/10"
-    }
-  }
-
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case "malware":
-        return <AlertTriangle className="w-4 h-4 text-red-400" />
-      case "botnet":
-        return <Activity className="w-4 h-4 text-purple-400" />
-      case "phishing":
-        return <Shield className="w-4 h-4 text-orange-400" />
-      case "vulnerability":
-        return <Zap className="w-4 h-4 text-yellow-400" />
-      case "breach":
-        return <Eye className="w-4 h-4 text-red-400" />
-      default:
-        return <Globe className="w-4 h-4 text-slate-400" />
+      case 'malware': return AlertTriangle
+      case 'botnet': return Bot
+      case 'vulnerability': return Shield
+      case 'scanning': return Eye
+      default: return Zap
     }
   }
 
-  const filteredThreats = filter === "all" ? threats : threats.filter((threat) => threat.type === filter)
+  const getSeverityColor = (severity: string) => {
+    switch (severity) {
+      case 'critical': return 'destructive'
+      case 'high': return 'destructive'
+      case 'medium': return 'secondary'
+      default: return 'outline'
+    }
+  }
 
-  const threatCounts = {
-    all: threats.length,
-    malware: threats.filter((t) => t.type === "malware").length,
-    botnet: threats.filter((t) => t.type === "botnet").length,
-    phishing: threats.filter((t) => t.type === "phishing").length,
-    vulnerability: threats.filter((t) => t.type === "vulnerability").length,
-    breach: threats.filter((t) => t.type === "breach").length,
+  const getTypeColor = (type: string) => {
+    switch (type) {
+      case 'malware': return 'text-red-500'
+      case 'botnet': return 'text-orange-500'
+      case 'vulnerability': return 'text-yellow-500'
+      case 'scanning': return 'text-blue-500'
+      default: return 'text-purple-500'
+    }
+  }
+
+  const formatTimeAgo = (timestamp: Date) => {
+    const now = new Date()
+    const diff = now.getTime() - timestamp.getTime()
+    const seconds = Math.floor(diff / 1000)
+    const minutes = Math.floor(seconds / 60)
+    const hours = Math.floor(minutes / 60)
+
+    if (hours > 0) return `${hours}h ago`
+    if (minutes > 0) return `${minutes}m ago`
+    return `${seconds}s ago`
   }
 
   return (
-    <Card className="bg-slate-900/40 border-slate-700/50 backdrop-blur-xl">
+    <Card className="h-[600px]">
       <CardHeader>
-        <CardTitle className="text-orange-400 flex items-center gap-2">
-          <Activity className="w-5 h-5" />
-          Live Threat Intelligence 👻
-          <Badge variant="outline" className="text-orange-400 border-orange-400 animate-pulse">
-            STREAMING
+        <CardTitle className="flex items-center gap-2">
+          <Zap className="h-5 w-5 text-primary" />
+          Live Threat Feed
+          <Badge variant="outline" className="ml-auto">
+            {threats.length} Active
           </Badge>
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap gap-2">
-          {Object.entries(threatCounts).map(([type, count]) => (
-            <Button
-              key={type}
-              variant={filter === type ? "default" : "outline"}
-              size="sm"
-              onClick={() => setFilter(type)}
-              className={`${
-                filter === type
-                  ? "bg-orange-600 hover:bg-orange-700"
-                  : "border-slate-600 text-slate-300 hover:bg-slate-700/50 bg-transparent"
-              }`}
-            >
-              {type.charAt(0).toUpperCase() + type.slice(1)} ({count})
-            </Button>
-          ))}
-        </div>
-
-        {loading ? (
-          <div className="flex items-center justify-center h-64">
-            <div className="text-slate-400">Loading live threat data... 🕸️</div>
-          </div>
-        ) : (
-          <div className="space-y-3 max-h-96 overflow-y-auto">
-            {filteredThreats.length === 0 ? (
-              <div className="text-center text-slate-400 py-8">
-                <Shield className="w-12 h-12 mx-auto mb-2 opacity-30" />
-                <p>No {filter === "all" ? "" : filter} threats detected</p>
-              </div>
-            ) : (
-              filteredThreats.map((threat) => (
-                <Card key={threat.id} className="bg-slate-800/30 border-slate-600">
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        {getTypeIcon(threat.type)}
-                        <div>
-                          <h4 className="font-medium text-white">{threat.description}</h4>
-                          <div className="flex items-center gap-2 text-sm text-slate-400 mt-1">
-                            <MapPin className="w-3 h-3" />
-                            <span>
-                              {threat.location.city}, {threat.location.country}
-                            </span>
-                            <Clock className="w-3 h-3 ml-2" />
-                            <span>{threat.timestamp.toLocaleTimeString()}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <Badge variant="outline" className={`text-xs ${getSeverityColor(threat.severity)}`}>
+      <CardContent className="p-0">
+        <ScrollArea className="h-[500px] px-6">
+          {loading ? (
+            <div className="space-y-4">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <div key={i} className="animate-pulse">
+                  <div className="flex items-start gap-3 p-3 rounded-lg border">
+                    <div className="w-8 h-8 bg-muted rounded-full"></div>
+                    <div className="flex-1 space-y-2">
+                      <div className="h-4 bg-muted rounded w-3/4"></div>
+                      <div className="h-3 bg-muted rounded w-1/2"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : threats.length === 0 ? (
+            <div className="flex items-center justify-center h-32 text-muted-foreground">
+              No threats detected
+            </div>
+          ) : (
+            <div className="space-y-3 pb-4">
+              {threats.map((threat) => {
+                const Icon = getTypeIcon(threat.type)
+                return (
+                  <div key={threat.id} className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                    <div className={`flex-shrink-0 p-2 rounded-full bg-muted ${getTypeColor(threat.type)}`}>
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-medium text-sm truncate">
+                          {threat.type.charAt(0).toUpperCase() + threat.type.slice(1)} Detection
+                        </span>
+                        <Badge variant={getSeverityColor(threat.severity) as any} className="text-xs">
                           {threat.severity.toUpperCase()}
                         </Badge>
-                        <Badge variant="outline" className="text-xs border-slate-500 text-slate-400">
-                          {threat.type.toUpperCase()}
-                        </Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
+                        {threat.description}
+                      </p>
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span>
+                          From: {threat.source} → {threat.target}
+                        </span>
+                        <span>
+                          {formatTimeAgo(threat.timestamp)}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 mt-1 text-xs text-muted-foreground">
+                        <span>{threat.location.city}, {threat.location.country}</span>
                       </div>
                     </div>
-
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <span className="text-slate-400">Source:</span>
-                        <span className="ml-2 text-slate-300 font-mono">{threat.source}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-400">Target:</span>
-                        <span className="ml-2 text-slate-300 font-mono">{threat.target}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))
-            )}
-          </div>
-        )}
-
-        {/* Educational Note */}
-        <Card className="bg-purple-900/20 border-purple-500/30">
-          <CardContent className="p-4">
-            <div className="flex items-start gap-3">
-              <Activity className="w-5 h-5 text-purple-400 mt-0.5" />
-              <div>
-                <h4 className="font-medium text-purple-400 mb-1">Understanding Threat Intelligence 🔮</h4>
-                <p className="text-sm text-purple-300">
-                  This feed shows real-time cyber threats detected across the internet. Each event represents malicious
-                  activity like malware infections, botnet communications, or vulnerability exploits. Security teams use
-                  this data to protect networks and respond to emerging threats.
-                </p>
-              </div>
+                  </div>
+                )
+              })}
             </div>
-          </CardContent>
-        </Card>
+          )}
+        </ScrollArea>
       </CardContent>
     </Card>
   )
